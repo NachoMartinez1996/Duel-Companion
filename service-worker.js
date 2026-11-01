@@ -1,8 +1,8 @@
 /*
  * Duel Companion - Service Worker
- * Cuando publiques una actualización importante, cambiá CACHE_NAME (v1 -> v2).
+ * Incrementá CACHE_NAME en la siguiente publicación para renovar la caché offline.
  */
-const CACHE_NAME = "duel-companion-v1";
+const CACHE_NAME = "duel-companion-v1.0.1";
 const APP_BASE = new URL("./", self.registration.scope);
 const APP_SHELL = [
   APP_BASE.href,
