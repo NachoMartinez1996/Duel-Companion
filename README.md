@@ -1,32 +1,46 @@
 # Duel Companion
 
-PWA inicial para llevar puntos de vida y modificar ATK/DEF durante duelos. No utiliza servicios externos ni necesita conexión después de la primera carga.
+Aplicación web instalable (PWA) para acompañar duelos físicos de Yu-Gi-Oh! TCG. Funciona localmente y puede utilizarse sin conexión después de la primera carga.
 
 ## Archivos
 
-- `index.html`: interfaz, estilos y lógica de la aplicación.
-- `manifest.webmanifest`: nombre, iconos y opciones de instalación.
-- `service-worker.js`: caché de los archivos necesarios para abrir la aplicación offline.
-- `icons/`: iconos de la aplicación.
+- `index.html`: interfaz, tablero y lógica del duelo.
+- `manifest.webmanifest`: metadatos para instalar la aplicación.
+- `service-worker.js`: guarda el app shell en caché para el uso offline.
+- `icons/`: iconos de 192 y 512 píxeles.
 
 ## Publicar en GitHub Pages
 
-1. Creá un repositorio, por ejemplo `duel-companion`.
-2. Subí el contenido de esta carpeta a la raíz del repositorio (no hace falta subir la carpeta contenedora).
-3. En GitHub, entrá en **Settings → Pages**.
-4. En **Build and deployment**, elegí **Deploy from a branch**, seleccioná la rama `main` y la carpeta `/ (root)`.
-5. Abrí la URL publicada con Chrome en Android y esperá a que cargue por primera vez.
-6. Usá el menú de Chrome → **Instalar aplicación** o **Agregar a pantalla principal**.
-7. Abrí la aplicación una vez y luego probala con el modo avión activado.
+1. Subí el contenido de esta carpeta a la raíz del repositorio (no el ZIP).
+2. En **Settings → Pages**, seleccioná **Deploy from a branch**, rama `main` y carpeta `/ (root)`.
+3. Abrí la URL publicada una vez con conexión y agregá la aplicación a la pantalla de inicio desde Chrome.
+4. Después de la primera carga, el tablero y las herramientas locales funcionan sin conexión.
 
-## Importante para GitHub Pages
+Las rutas son relativas para funcionar también cuando GitHub Pages publica el sitio dentro de una subcarpeta del dominio.
 
-Las rutas de los archivos son relativas (`./...`) para que funcione tanto en un dominio propio como en una URL de proyecto del tipo `https://usuario.github.io/duel-companion/`.
+## Tablero
 
-## Actualizaciones
+- Dos campos de jugador con cinco Zonas de Monstruos y cinco Zonas de Mágicas/Trampas cada uno.
+- Dos Zonas de Monstruos Extra compartidas entre ambos jugadores.
+- Una Zona de Campo independiente para cada jugador.
+- Las zonas se tocan para abrir un editor contextual; las cartas no generan formularios permanentes en la página.
+- Las Zonas de Péndulo se señalan en los extremos de la fila de Mágicas/Trampas.
+- Las Mágicas de Equipo pueden asociarse a un monstruo propio o adversario, incluido uno en una Zona de Monstruos Extra. El tablero muestra la relación en ambos espacios.
+- La orientación del monstruo se representa en el icono de carta: vertical para Ataque, horizontal para Defensa y dorso para Defensa boca abajo.
+- Deck, Extra Deck, Cementerio y Desterradas se muestran como referencias visuales; no se administra el contenido de esas pilas en esta versión.
 
-Cuando hagas cambios y quieras que los dispositivos descarguen una nueva versión del contenido guardado en caché, cambiá el valor de `CACHE_NAME` en `service-worker.js`, por ejemplo de `duel-companion-v1` a `duel-companion-v2`.
+## Herramientas
 
-## Manifest
+- Contador de puntos de vida para dos jugadores.
+- Seguimiento manual de fases.
+- Registro de monstruos: ATK/DEF, Nivel, Rango, Valor de Enlace, Atributo, Tipo/Raza, Péndulo, escalas, posición, efecto negado y contadores.
+- Registro de Mágicas/Trampas: tipo, estado, negación de efecto, contadores y objetivo de las Mágicas de Equipo.
+- Dados y moneda.
 
-El archivo está escrito en JSON aunque su extensión sea `.webmanifest`. Si preferís llamarlo `manifest.json`, cambiá el `href` del `<link rel="manifest">` en `index.html` y la entrada correspondiente en `APP_SHELL` en `service-worker.js`.
+La aplicación registra el estado indicado por los jugadores; no interpreta cartas ni resuelve cadenas o reglas automáticamente.
+
+## Persistencia y actualizaciones
+
+La partida se guarda en `localStorage` de este dispositivo. No se sincroniza entre navegadores o dispositivos.
+
+El Service Worker utiliza actualmente `CACHE_NAME = "duel-companion-v2"`, solicitado para esta versión mientras la primera actualización aún no se publique. Después de publicar esta versión, incrementá ese nombre (por ejemplo, a `duel-companion-v1.0.1`) en la próxima actualización para renovar la caché.
