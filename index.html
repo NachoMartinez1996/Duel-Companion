@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es">
+<html lang="es-Ar">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -88,6 +88,38 @@
     .note { color: var(--muted); font-size: .86rem; margin: .35rem 0 .65rem; }
     .duel-options { display: flex; align-items: center; gap: .55rem; flex-wrap: wrap; margin: 0 0 1rem; color: var(--muted); font-size: .82rem; }
     .duel-options select { width: auto; min-width: 88px; padding: .4rem .55rem; }
+    .phase-panel {
+      margin: 0 0 1rem;
+      padding: 1rem;
+      border: 1px solid #39749c;
+      border-radius: 16px;
+      background: linear-gradient(145deg, #123653, #0c2439 75%);
+      box-shadow: 0 12px 30px #0003;
+    }
+    .phase-heading { display: flex; justify-content: space-between; align-items: flex-start; gap: .8rem; flex-wrap: wrap; }
+    .eyebrow { color: var(--accent); font-size: .68rem; font-weight: 800; letter-spacing: .12em; margin: 0 0 .25rem; }
+    .phase-heading h2 { margin: 0; font-size: clamp(1.1rem, 4vw, 1.4rem); }
+    .turn-meta { color: var(--muted); font-size: .8rem; margin: .2rem 0 0; }
+    .phase-counter { white-space: nowrap; border: 1px solid #39749c; background: #0a2033; border-radius: 999px; padding: .45rem .7rem; color: var(--accent); font-size: .78rem; font-weight: 750; }
+    .phase-track { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: .4rem; margin: 1rem 0; }
+    .phase-step { min-width: 0; padding: .55rem .35rem; border: 1px solid #285579; border-radius: 10px; background: #091e30; color: var(--muted); text-align: center; }
+    .phase-step-number { display: block; font-size: .68rem; opacity: .8; }
+    .phase-step-label { display: block; margin-top: .15rem; font-size: .72rem; font-weight: 700; overflow-wrap: anywhere; }
+    .phase-step.done { border-color: #34775f; color: #a8e8c9; background: #0d302e; }
+    .phase-step.current { border-color: var(--accent); background: #174969; color: #fff; box-shadow: 0 0 0 1px var(--accent) inset; }
+    .phase-detail { border: 1px solid #285579; border-radius: 12px; background: #071d30; padding: .85rem; }
+    .phase-detail h3 { margin: .1rem 0 .35rem; font-size: 1.03rem; }
+    .phase-detail p { color: #d4e4f1; font-size: .87rem; line-height: 1.5; margin: .35rem 0 0; }
+    .phase-reminder { margin-top: .65rem; padding: .6rem .7rem; border-left: 3px solid #e6bd69; border-radius: 7px; background: #352d1d; color: #ffe4a6; font-size: .8rem; line-height: 1.45; }
+    .phase-controls { display: flex; justify-content: space-between; align-items: center; gap: .6rem; flex-wrap: wrap; margin-top: .8rem; }
+    .phase-controls-right { display: flex; gap: .5rem; flex-wrap: wrap; margin-left: auto; }
+    .phase-controls button { font-size: .82rem; }
+    .phase-controls button:disabled { opacity: .4; cursor: not-allowed; }
+    .phase-primary { background: #17617e; border-color: #55bad2; font-weight: 750; }
+    .phase-help { margin-top: .75rem; color: var(--muted); font-size: .82rem; }
+    .phase-help summary { cursor: pointer; color: var(--accent); font-weight: 700; }
+    .phase-help ul { padding-left: 1.2rem; line-height: 1.55; }
+    .phase-help li { margin: .35rem 0; }
     .players-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; align-items: start; }
     .player-card {
       min-width: 0;
@@ -122,6 +154,37 @@
     .monster-index { color: var(--accent); font-weight: 750; font-size: .78rem; }
     .tiny-button { font-size: .72rem; padding: .35rem .5rem; }
     .monster-name { margin-bottom: .55rem; }
+    .monster-type-block { position: relative; margin: .15rem 0 .65rem; }
+    .monster-type-row { display: grid; grid-template-columns: minmax(0, 1fr) 40px; gap: .5rem; align-items: end; }
+    .monster-type-row select { padding: .48rem .55rem; }
+    .monster-info { position: relative; }
+    .monster-info summary {
+      width: 38px; height: 38px; display: grid; place-items: center;
+      border: 1px solid #39749c; border-radius: 50%; background: #123653;
+      color: var(--accent); font-size: 1.05rem; font-weight: 800; cursor: pointer;
+      list-style: none; user-select: none;
+    }
+    .monster-info summary::-webkit-details-marker { display: none; }
+    .monster-info[open] summary { border-color: var(--accent); background: #174969; }
+    .monster-info-content {
+      position: absolute; top: 100%; left: 0; right: 0; z-index: 10;
+      margin-top: .35rem; padding: .7rem .75rem; border: 1px solid #39749c;
+      border-radius: 9px; background: #102d46; color: #dcebf7;
+      box-shadow: 0 10px 24px #0008; font-size: .78rem; line-height: 1.5;
+    }
+    .monster-info-content strong { display: block; color: var(--accent); margin-bottom: .2rem; }
+    .monster-info-content p { margin: 0; }
+    .pendulum-option { display: flex; align-items: center; gap: .45rem; margin-top: .5rem; color: var(--muted); font-size: .78rem; }
+    .pendulum-option input { width: auto; accent-color: var(--accent); }
+    .effect-status { display: flex; align-items: center; gap: .55rem; flex-wrap: wrap; margin-top: .65rem; }
+    .effect-toggle {
+      display: inline-flex; align-items: center; justify-content: center; gap: .45rem;
+      min-height: 36px; padding: .4rem .65rem; border-color: #34775f;
+      background: #10382f; color: #a8e8c9; font-size: .76rem; font-weight: 750;
+    }
+    .effect-toggle::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+    .effect-toggle.is-negated { border-color: #a85d67; background: #512b35; color: #ffc0c5; }
+    .effect-note { color: var(--muted); font-size: .7rem; }
     .base-grid, .current-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; }
     .field-label { color: var(--muted); display: block; font-size: .7rem; margin-bottom: .25rem; }
     .base-grid input { padding: .45rem .5rem; }
@@ -130,6 +193,51 @@
     .stat-value { display: block; font-weight: 800; font-size: 1.2rem; font-variant-numeric: tabular-nums; }
     .stat-controls { display: flex; justify-content: center; gap: .4rem; margin-top: .35rem; }
     .stat-controls button { width: 38px; padding: .3rem; font-weight: 800; }
+    .advanced-details, .spelltrap-panel {
+      margin-top: .7rem; border: 1px solid #285579; border-radius: 10px;
+      background: #0b263c; padding: .65rem .7rem;
+    }
+    .advanced-details > summary, .spelltrap-panel > summary, .zone-card > summary, .counter-details > summary {
+      cursor: pointer; color: var(--accent); font-size: .8rem; font-weight: 750;
+      list-style-position: inside;
+    }
+    .advanced-grid, .property-grid, .scale-grid, .zone-fields {
+      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .55rem; margin-top: .7rem;
+    }
+    .property-grid label, .scale-grid label, .zone-fields label { min-width: 0; }
+    .advanced-grid input, .advanced-grid select, .property-grid input, .property-grid select,
+    .scale-grid input, .zone-fields input, .zone-fields select { padding: .48rem .52rem; }
+    .full-span { grid-column: 1 / -1; }
+    .subsection-label { color: var(--accent); font-size: .72rem; font-weight: 800; letter-spacing: .04em; margin: .85rem 0 .4rem; }
+    .property-note, .zone-note { color: var(--muted); font-size: .7rem; line-height: 1.45; margin: .4rem 0 0; }
+    .position-row { margin-top: .65rem; }
+    .link-rating { margin-top: .6rem; }
+    .counter-details { margin-top: .7rem; border-top: 1px solid #214866; padding-top: .6rem; }
+    .counter-add { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .4rem; margin-top: .55rem; }
+    .counter-add input { padding: .48rem .55rem; }
+    .counter-add button { padding: .45rem .65rem; font-size: .76rem; }
+    .counter-list { display: grid; gap: .4rem; margin-top: .55rem; }
+    .counter-item { display: grid; grid-template-columns: minmax(0, 1fr) auto auto auto; align-items: center; gap: .35rem; border: 1px solid #214866; border-radius: 8px; padding: .4rem; background: #102d46; }
+    .counter-name { font-size: .76rem; overflow-wrap: anywhere; }
+    .counter-count { min-width: 1.6rem; text-align: center; font-weight: 800; font-variant-numeric: tabular-nums; }
+    .counter-item button { min-width: 30px; padding: .25rem .4rem; font-weight: 800; }
+    .counter-remove { border-color: #865050; background: #512b35; }
+    .effect-status.compact { margin-top: .5rem; }
+    .zone-list { display: grid; gap: .55rem; margin-top: .65rem; }
+    .zone-card { border: 1px solid #285579; border-radius: 9px; padding: .6rem; background: #0a2033; }
+    .zone-card[open] { border-color: #39749c; }
+    .zone-card-body { padding-top: .5rem; }
+    .zone-status { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: .5rem; margin-top: .55rem; }
+    .zone-actions { display: flex; align-items: center; justify-content: space-between; gap: .5rem; margin-top: .55rem; }
+    .zone-clear { border-color: #865050; background: #512b35; font-size: .72rem; padding: .35rem .5rem; }
+    .field-zone-card { margin-top: .65rem; }
+    .monster-stat-hint { color: var(--muted); font-size: .68rem; margin: .35rem 0 0; }
+    .negated-label { color: #ffc0c5; }
+    @media (max-width: 360px) {
+      .advanced-grid, .property-grid, .scale-grid, .zone-fields, .zone-status { grid-template-columns: 1fr; }
+      .full-span { grid-column: auto; }
+      .counter-item { grid-template-columns: minmax(0, 1fr) auto auto auto; }
+    }
     .tools-panel { margin-top: 1rem; padding: 1rem; border: 1px solid var(--line); border-radius: 16px; background: #0d263c; }
     .tools-panel h2 { margin: 0 0 .65rem; font-size: 1rem; }
     .tool-buttons { display: flex; flex-wrap: wrap; gap: .55rem; }
@@ -138,6 +246,11 @@
     .danger { border-color: #865050; background: #512b35; }
     .danger:hover { background: #713846; }
     @media (max-width: 760px) {
+      .phase-track { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .phase-panel { padding: .8rem; }
+      .phase-controls { align-items: stretch; }
+      .phase-controls > button, .phase-controls-right { flex: 1 1 auto; }
+      .phase-controls-right button { flex: 1 1 auto; }
       .app-shell { padding: .75rem; }
       .players-grid { grid-template-columns: 1fr; }
       .topbar { align-items: flex-start; }
@@ -147,6 +260,138 @@
       .quick-life { grid-template-columns: repeat(2, 1fr); }
       .custom-life { grid-template-columns: 1fr 1fr; }
       .custom-life input { grid-column: 1 / -1; }
+    }
+
+    /* Compact, clickable duel board */
+    .duel-board { display: flex; flex-direction: column; gap: .65rem; }
+    .player-board { min-width: 0; padding: .7rem; border: 1px solid var(--line); border-radius: 15px; background: linear-gradient(155deg, #143958, #0b2237 80%); box-shadow: 0 10px 24px #0003; }
+    .board-player-heading { display: flex; align-items: center; justify-content: space-between; gap: .7rem; margin-bottom: .45rem; }
+    .board-player-name { display: flex; align-items: center; gap: .5rem; min-width: 0; flex: 1; }
+    .board-player-name input { max-width: 210px; padding: .4rem .5rem; font-weight: 750; }
+    .lp-display { display: flex; align-items: baseline; gap: .4rem; white-space: nowrap; }
+    .lp-display > span { color: var(--muted); font-size: .68rem; font-weight: 800; }
+    .lp-display .life-total { margin: 0; font-size: clamp(1.4rem, 5vw, 2rem); line-height: 1; }
+    .life-controls { display: flex; align-items: center; gap: .35rem; margin-bottom: .55rem; flex-wrap: wrap; }
+    .life-controls > button { padding: .34rem .5rem; font-size: .72rem; }
+    .custom-life-details { margin-left: auto; position: relative; }
+    .custom-life-details > summary { color: var(--accent); cursor: pointer; font-size: .72rem; list-style-position: inside; }
+    .custom-life-details[open] .custom-life { position: absolute; right: 0; top: 100%; z-index: 15; width: min(270px, 82vw); padding: .6rem; background: #102d46; border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 10px 24px #0008; }
+    .custom-life { display: grid; grid-template-columns: 1fr 1fr; gap: .35rem; }
+    .custom-life input { grid-column: 1/-1; padding: .4rem; }
+    .custom-life button { padding: .4rem; font-size: .72rem; }
+    .board-side-layout { display: grid; grid-template-columns: minmax(0, 1fr) 82px; gap: .5rem; align-items: stretch; }
+    .board-field-main { display: flex; flex-direction: column; gap: .35rem; min-width: 0; }
+    .zone-row { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .3rem; min-width: 0; }
+    .board-slot { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: .13rem; min-width: 0; min-height: 96px; padding: .3rem .16rem .25rem; overflow: hidden; border-radius: 8px; border: 1px solid #39749c; background: #091e30; text-align: center; color: var(--text); }
+    .board-slot.empty { border-style: dashed; color: #8daac0; background: #0a1d2d; }
+    .board-slot.occupied { background: linear-gradient(155deg, #173e5e, #0b2439); }
+    .board-slot.face-down { background: linear-gradient(145deg, #342a58, #18203b); border-color: #7866a7; }
+    .slot-topline { display: flex; align-items: center; justify-content: space-between; width: 100%; gap: .12rem; color: #9bb8cb; font-size: .59rem; font-weight: 800; }
+    .slot-title { display: -webkit-box; width: 100%; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow-wrap: anywhere; font-size: .65rem; line-height: 1.12; font-weight: 750; }
+    .slot-kind { display: block; width: 100%; color: #a9bfd2; font-size: .56rem; line-height: 1.15; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .slot-stats { color: #b8e5f2; font-size: .59rem; font-weight: 750; font-variant-numeric: tabular-nums; }
+    .slot-badges { display: flex; flex-wrap: wrap; justify-content: center; gap: .12rem; width: 100%; }
+    .slot-badge { display: inline-block; max-width: 100%; border: 1px solid #47718d; border-radius: 4px; padding: .08rem .17rem; color: #c9e7f5; background: #102d46; font-size: .5rem; line-height: 1.1; overflow-wrap: anywhere; }
+    .slot-badge.negated { border-color: #a85d67; color: #ffc0c5; background: #512b35; }
+    .slot-badge.equip-badge { color: #f4d58b; border-color: #927544; }
+    .slot-add { margin-top: auto; font-size: 1.05rem; color: var(--accent); line-height: 1; }
+    .slot-edit-hint { margin-top: auto; color: #80b8d4; font-size: .52rem; opacity: .85; }
+    .card-glyph { display: inline-block; width: 10px; height: 15px; border: 1px solid #b4d2e4; border-radius: 2px; background: linear-gradient(145deg, #b77c44, #603b27); flex: 0 0 auto; }
+    .card-glyph.defense { transform: rotate(90deg); }
+    .card-glyph.back { background: repeating-linear-gradient(135deg, #4e3b7d 0 3px, #211b40 3px 6px); border-color: #aa96df; }
+    .spell-glyph { display: inline-block; width: 10px; height: 15px; border: 1px solid #82c7a7; border-radius: 2px; background: linear-gradient(145deg, #2d9571, #164638); }
+    .spell-row .spell-glyph { border-color: #77c8e3; background: linear-gradient(145deg, #267c9a, #16404e); }
+    .pendulum-zone-label { color: #e0c37d; font-size: .5rem; font-weight: 800; }
+    .board-side-zones { display: flex; flex-direction: column; gap: .35rem; min-width: 0; }
+    .field-slot { width: 100%; min-height: 82px; flex: 1; background: #142e44; }
+    .field-slot-icon { color: #e0c37d; font-size: 1rem; }
+    .aux-zones { display: grid; grid-template-columns: 1fr 1fr; gap: .2rem; }
+    .aux-zones span { min-width: 0; padding: .25rem .1rem; border: 1px solid #234761; border-radius: 5px; color: #8eabc0; background: #0a1e30; text-align: center; font-size: .5rem; line-height: 1.1; }
+    .shared-extra-zones { padding: .45rem .25rem; border: 1px dashed #39749c; border-radius: 11px; background: #091d2e; }
+    .shared-extra-heading { display: flex; align-items: center; justify-content: center; gap: .45rem; color: #92b7cb; font-size: .58rem; letter-spacing: .07em; font-weight: 800; text-align: center; }
+    .shared-line { height: 1px; flex: 1; background: #315d78; }
+    .extra-zone-row { display: grid; grid-template-columns: repeat(2, minmax(0, 140px)); justify-content: center; gap: .5rem; margin-top: .4rem; }
+    .extra-zone-slot { display: flex; flex-direction: column; align-items: center; gap: .18rem; min-height: 61px; padding: .35rem; border: 1px solid #6975a2; border-radius: 8px; background: #252747; color: #f0edff; text-align: center; }
+    .extra-zone-slot.empty { border-style: dashed; color: #aeb1cf; background: #161d38; }
+    .extra-zone-slot strong { max-width: 100%; font-size: .65rem; overflow-wrap: anywhere; }
+    .extra-zone-slot small { color: #b8b6d4; font-size: .57rem; }
+    .extra-zone-number { color: #c4b8f5; font-size: .55rem; font-weight: 800; letter-spacing: .06em; }
+    .extra-zone-note { margin: .35rem 0 0; color: #91aabe; font-size: .61rem; line-height: 1.35; text-align: center; }
+    .equip-target-indicator { color: #f4d58b !important; font-weight: 750; }
+    .card-editor { width: min(560px, calc(100% - 1rem)); max-width: 560px; max-height: min(88dvh, 820px); padding: 0; border: 1px solid #4a84a8; border-radius: 16px; background: #0b2135; color: var(--text); box-shadow: 0 24px 80px #000a; }
+    .card-editor::backdrop { background: #020912c9; backdrop-filter: blur(3px); }
+    .editor-frame { max-height: min(88dvh, 820px); overflow-y: auto; overscroll-behavior: contain; }
+    .editor-header { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; justify-content: space-between; gap: .75rem; padding: .85rem 1rem; border-bottom: 1px solid #315d78; background: #102d46; }
+    .editor-header h2 { margin: 0; font-size: 1.08rem; overflow-wrap: anywhere; }
+    .editor-header .eyebrow { margin-bottom: .15rem; }
+    .icon-close { width: 36px; height: 36px; flex: 0 0 auto; padding: 0; border-radius: 50%; font-size: 1.35rem; line-height: 1; }
+    .editor-body { display: grid; gap: .75rem; padding: .9rem 1rem 1rem; }
+    .editor-body label { min-width: 0; }
+    .editor-body input, .editor-body select { padding: .55rem .6rem; }
+    .editor-subtitle { margin: .1rem 0 -.3rem; padding-bottom: .3rem; border-bottom: 1px solid #234761; color: var(--accent); font-size: .75rem; font-weight: 850; letter-spacing: .06em; text-transform: uppercase; }
+    .editor-advanced { border: 1px solid #285579; border-radius: 10px; padding: .65rem; background: #0a1e30; }
+    .editor-advanced > summary { cursor: pointer; color: var(--accent); font-size: .82rem; font-weight: 750; }
+    .editor-actions { display: flex; justify-content: space-between; align-items: center; gap: .55rem; padding-top: .5rem; border-top: 1px solid #234761; }
+    .editor-action-left { display: flex; flex-wrap: wrap; gap: .4rem; }
+    .editor-actions button { font-size: .76rem; padding: .5rem .6rem; }
+    .monster-type-row { display: grid; grid-template-columns: minmax(0, 1fr) 40px; gap: .5rem; align-items: end; }
+    .monster-info { position: relative; }
+    .monster-info summary { width: 38px; height: 38px; display: grid; place-items: center; border: 1px solid #39749c; border-radius: 50%; background: #123653; color: var(--accent); font-size: 1.05rem; font-weight: 800; cursor: pointer; list-style: none; }
+    .monster-info summary::-webkit-details-marker { display: none; }
+    .monster-info-content { position: absolute; top: 100%; left: auto; right: 0; z-index: 10; width: min(310px, 78vw); margin-top: .35rem; padding: .7rem; border: 1px solid #39749c; border-radius: 9px; background: #102d46; color: #dcebf7; box-shadow: 0 10px 24px #0008; font-size: .78rem; line-height: 1.5; }
+    .monster-info-content strong { display: block; color: var(--accent); margin-bottom: .2rem; }
+    .monster-info-content p { margin: 0; }
+    .pendulum-option { display: flex; align-items: center; gap: .45rem; color: var(--muted); font-size: .78rem; }
+    .pendulum-option input { width: auto; }
+    .effect-status { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
+    .effect-toggle { display: inline-flex; align-items: center; gap: .4rem; min-height: 36px; padding: .4rem .65rem; border-color: #34775f; background: #10382f; color: #a8e8c9; font-size: .76rem; font-weight: 750; }
+    .effect-toggle::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+    .effect-toggle.is-negated { border-color: #a85d67; background: #512b35; color: #ffc0c5; }
+    .effect-note, .property-note { color: var(--muted); font-size: .7rem; line-height: 1.4; }
+    .base-grid, .current-grid, .advanced-grid, .property-grid, .scale-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .55rem; }
+    .stat-box { min-width: 0; border: 1px solid #214866; background: #102d46; border-radius: 9px; padding: .5rem; text-align: center; }
+    .stat-value { display: block; font-size: 1.15rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+    .stat-controls { display: flex; justify-content: center; gap: .4rem; margin-top: .35rem; }
+    .stat-controls button { width: 38px; padding: .3rem; font-weight: 800; }
+    .counter-details { margin-top: .25rem; border-top: 1px solid #214866; padding-top: .6rem; }
+    .counter-details > summary { cursor: pointer; color: var(--accent); font-size: .8rem; font-weight: 750; }
+    .counter-add { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .4rem; margin-top: .55rem; }
+    .counter-add button { font-size: .76rem; }
+    .counter-list { display: grid; gap: .4rem; margin-top: .55rem; }
+    .counter-item { display: grid; grid-template-columns: minmax(0,1fr) auto auto auto; align-items: center; gap: .35rem; border: 1px solid #214866; border-radius: 8px; padding: .4rem; background: #102d46; }
+    .counter-name { font-size: .76rem; overflow-wrap: anywhere; }
+    .counter-count { min-width: 1.6rem; text-align: center; font-weight: 800; }
+    .counter-item button { min-width: 30px; padding: .25rem .4rem; }
+    .counter-remove, .danger { border-color: #865050; background: #512b35; }
+    .full-span { grid-column: 1 / -1; }
+    .subsection-label { color: var(--accent); font-size: .72rem; font-weight: 800; margin: .7rem 0 .35rem; }
+    .phase-panel { padding: .75rem; }
+    .phase-track { margin: .6rem 0; }
+    .phase-detail { padding: .65rem; }
+    @media (max-width: 520px) {
+      .app-shell { padding: .55rem; }
+      .board-player-name input { max-width: 150px; }
+      .player-board { padding: .5rem; }
+      .board-side-layout { grid-template-columns: minmax(0, 1fr) 66px; gap: .32rem; }
+      .zone-row { gap: .2rem; }
+      .board-slot { min-height: 86px; padding: .25rem .1rem; }
+      .slot-title { font-size: .58rem; }
+      .slot-kind, .slot-stats { font-size: .51rem; }
+      .slot-badge { font-size: .44rem; }
+      .aux-zones span { font-size: .45rem; }
+      .life-controls > button { flex: 1; }
+      .custom-life-details { margin-left: 0; }
+      .extra-zone-slot { min-height: 56px; }
+    }
+    @media (max-width: 360px) {
+      .board-side-layout { grid-template-columns: minmax(0, 1fr) 58px; }
+      .board-slot { min-height: 78px; }
+      .slot-topline { font-size: .52rem; }
+      .slot-title { font-size: .53rem; }
+      .slot-kind, .slot-stats { font-size: .47rem; }
+      .slot-add { font-size: .85rem; }
+      .shared-extra-heading { font-size: .52rem; }
+      .editor-body { padding: .7rem; }
     }
   </style>
 </head>
@@ -166,7 +411,7 @@
       </div>
     </header>
 
-    <p class="note">Los cambios se guardan automáticamente en este dispositivo. Esta primera versión no necesita conexión ni cuentas.</p>
+    <p class="note">Los cambios se guardan automáticamente en este dispositivo. El seguimiento es manual: la aplicación no resuelve efectos ni reemplaza el reglamento.</p>
     <div class="duel-options">
       <label for="stat-step">Incremento por toque en ATK/DEF:</label>
       <select id="stat-step">
@@ -175,9 +420,22 @@
         <option value="500">500</option>
         <option value="1000">1000</option>
       </select>
+      <label for="first-player">Comienza el próximo duelo:</label>
+      <select id="first-player">
+        <option value="0">Jugador 1</option>
+        <option value="1">Jugador 2</option>
+      </select>
     </div>
 
-    <section id="players" class="players-grid" aria-label="Marcadores de los jugadores"></section>
+    <section id="phase-tracker" class="phase-panel" aria-label="Fases del turno"></section>
+
+    <section id="players" class="duel-board" aria-label="Campo de duelo"></section>
+
+    <dialog id="card-editor" class="card-editor" aria-labelledby="editor-title">
+      <div class="editor-frame">
+        <div id="editor-content"></div>
+      </div>
+    </dialog>
 
     <section class="tools-panel" aria-labelledby="tools-title">
       <h2 id="tools-title">Herramientas del duelo</h2>
@@ -201,17 +459,141 @@
     const saveStatus = document.getElementById("save-status");
     const toolResult = document.getElementById("tool-result");
 
-    function emptyMonster() {
-      return { name: "", baseAtk: 0, baseDef: 0, atk: 0, def: 0 };
+    const PHASES = {
+      draw: {
+        label: "Draw Phase",
+        spanish: "Fase de Robo",
+        description: "El jugador en turno roba 1 carta de su Deck Principal. Después del robo pueden activarse cartas y efectos permitidos antes de avanzar a la Standby Phase."
+      },
+      standby: {
+        label: "Standby Phase",
+        spanish: "Fase de Espera",
+        description: "Se resuelven los efectos y se pagan los costes que indiquen que deben ocurrir durante esta fase. Si ninguna carta requiere una acción, avanzá a Main Phase 1."
+      },
+      main1: {
+        label: "Main Phase 1",
+        spanish: "Fase Principal 1",
+        description: "Es la fase para Invocar o Colocar monstruos, activar o Colocar cartas Mágicas y de Trampa, cambiar posiciones de batalla y activar efectos permitidos. Al terminar, podés entrar en Battle Phase o pasar directamente a End Phase."
+      },
+      battle: {
+        label: "Battle Phase",
+        spanish: "Fase de Batalla",
+        description: "Declarás ataques y resolvés las batallas. Al terminar la Battle Phase, podés continuar a Main Phase 2 o pasar directamente a End Phase. Dentro de esta fase hay pasos de inicio, batalla, daño y fin."
+      },
+      main2: {
+        label: "Main Phase 2",
+        spanish: "Fase Principal 2",
+        description: "Es otra oportunidad para realizar acciones propias de una Main Phase, después de la batalla. No podés repetir acciones limitadas por turno que ya utilizaste, como tu Invocación Normal."
+      },
+      end: {
+        label: "End Phase",
+        spanish: "Fase Final",
+        description: "Se resuelven los efectos que se activan o aplican al final del turno. Si tenés más de 6 cartas en la mano, normalmente descartás hasta quedarte con 6; algunos efectos pueden modificar ese límite. Después termina tu turno."
+      }
+    };
+
+    const STANDARD_PHASE_SEQUENCE = ["draw", "standby", "main1", "battle", "main2", "end"];
+
+    function emptyCounter() {
+      return { name: "", count: 0 };
     }
 
-    function newGameState() {
+    function emptyMonster() {
+      return {
+        name: "", type: "", isPendulum: false, effectNegated: false,
+        baseAtk: 0, baseDef: 0, atk: 0, def: 0,
+        baseLevel: 0, level: 0, baseRank: 0, rank: 0, linkRating: 0,
+        baseAttribute: "", attribute: "", baseRace: "", race: "",
+        position: "attack",
+        baseScaleLeft: 0, scaleLeft: 0, baseScaleRight: 0, scaleRight: 0,
+        counters: []
+      };
+    }
+
+    function emptyZoneCard(kind = "") {
+      return {
+        name: "", kind, faceUp: false, effectNegated: false, equippedTo: "",
+        equippedToOwner: null, equippedToPlayer: null, equippedToMonster: null, equippedToExtra: null,
+        counters: []
+      };
+    }
+
+    const MONSTER_TYPES = {
+      normal: {
+        label: "Normal",
+        description: "Los monstruos Normales no tienen efectos propios. Suelen describirse por su historia, sus características y sus puntos de ATK y DEF. Se Invocan de forma Normal o se Colocan siguiendo las reglas habituales."
+      },
+      effect: {
+        label: "Efecto",
+        description: "Los monstruos de Efecto tienen uno o más efectos indicados en el texto de la carta. Pueden activarse, aplicarse continuamente o funcionar bajo condiciones concretas. Leé siempre el texto completo para conocer sus límites y tiempos de activación."
+      },
+      ritual: {
+        label: "Ritual",
+        description: "Los Monstruos de Ritual se Invocan mediante una Carta Mágica de Ritual u otro procedimiento indicado. Normalmente requieren ofrecer monstruos cuyos Niveles cumplan el requisito de la carta. Se colocan en el Deck Principal, salvo que otra regla indique lo contrario."
+      },
+      fusion: {
+        label: "Fusión",
+        description: "Los Monstruos de Fusión suelen estar en el Extra Deck. Se Invocan utilizando los materiales indicados y un procedimiento que permita la Invocación por Fusión, como Polimerización. Los materiales y el método exactos dependen de cada carta."
+      },
+      synchro: {
+        label: "Sincronía",
+        description: "Para una Invocación por Sincronía, normalmente se utiliza un monstruo Cantante y uno o más monstruos que no sean Cantantes. La suma de sus Niveles debe coincidir exactamente con el Nivel del Monstruo de Sincronía. Se encuentran en el Extra Deck."
+      },
+      xyz: {
+        label: "Xyz",
+        description: "Los Monstruos Xyz se Invocan superponiendo monstruos que cumplan el requisito de Nivel indicado. En lugar de Nivel tienen Rango. Los materiales quedan acoplados debajo del Monstruo Xyz y pueden desprenderse para pagar costes o activar efectos. Se encuentran en el Extra Deck."
+      },
+      link: {
+        label: "Enlace",
+        description: "Los Monstruos de Enlace se Invocan usando monstruos como Materiales de Enlace, respetando los requisitos de la carta. Tienen un Valor de Enlace y flechas que señalan zonas. No tienen Nivel ni DEF, y no pueden ponerse en Posición de Defensa. Se encuentran en el Extra Deck."
+      },
+      token: {
+        label: "Ficha / Token",
+        description: "Las Fichas son monstruos generados por efectos de cartas; no forman parte del Deck y no pueden existir en la mano, el Cementerio ni el Deck. Cuando una Ficha deja el Campo, desaparece. Usá esta opción para identificar visualmente una ficha en la zona."
+      }
+    };
+
+    const ATTRIBUTES = {
+      DARK: "OSCURIDAD", DIVINE: "DIVINIDAD", EARTH: "TIERRA", FIRE: "FUEGO",
+      LIGHT: "LUZ", WATER: "AGUA", WIND: "VIENTO"
+    };
+
+    const SPELL_TRAP_TYPES = {
+      spellNormal: "Mágica Normal",
+      spellQuick: "Mágica Rápida",
+      spellContinuous: "Mágica Continua",
+      spellEquip: "Mágica de Equipo",
+      spellRitual: "Mágica de Ritual",
+      spellPendulum: "Monstruo Péndulo en Zona Péndulo",
+      trapNormal: "Trampa Normal",
+      trapContinuous: "Trampa Continua",
+      trapCounter: "Trampa de Contraefecto"
+    };
+
+    const PENDULUM_DESCRIPTION = "Péndulo no reemplaza necesariamente al tipo principal: una carta puede ser, por ejemplo, Monstruo de Efecto/Péndulo, Sincronía/Péndulo o Xyz/Péndulo. Tiene dos Escalas y puede colocarse en las Zonas de Péndulo para realizar Invocaciones por Péndulo según sus reglas.";
+
+    function createTurnState(firstPlayerIndex = 0) {
+      const first = firstPlayerIndex === 1 ? 1 : 0;
+      return {
+        turnNumber: 1,
+        firstPlayerIndex: first,
+        currentPlayerIndex: first,
+        phase: "draw",
+        phaseHistory: ["draw"]
+      };
+    }
+
+    function newGameState(firstPlayerIndex = 0) {
       return {
         players: [0, 1].map((index) => ({
           name: `Jugador ${index + 1}`,
           lp: 8000,
-          monsters: Array.from({ length: 5 }, emptyMonster)
-        }))
+          monsters: Array.from({ length: 5 }, emptyMonster),
+          spellTraps: Array.from({ length: 5 }, () => emptyZoneCard()),
+          fieldSpell: emptyZoneCard("field")
+        })),
+        extraMonsterZones: Array.from({ length: 2 }, () => ({ ownerIndex: null, monster: emptyMonster() })),
+        turn: createTurnState(firstPlayerIndex)
       };
     }
 
@@ -220,29 +602,99 @@
       return Number.isFinite(parsed) ? parsed : 0;
     }
 
+    function normalizeCounters(value) {
+      if (!Array.isArray(value)) return [];
+      return value.slice(0, 20).map((counter) => ({
+        name: typeof counter?.name === "string" ? counter.name.slice(0, 32) : "Contador",
+        count: Math.max(0, numberOrZero(counter?.count))
+      }));
+    }
+
+    function normalizeMonster(monster) {
+      const source = monster && typeof monster === "object" ? monster : {};
+      const normalized = {
+        ...emptyMonster(),
+        name: typeof source.name === "string" ? source.name : "",
+        type: Object.hasOwn(MONSTER_TYPES, source.type) ? source.type : "",
+        isPendulum: Boolean(source.isPendulum),
+        effectNegated: Boolean(source.effectNegated),
+        baseAtk: Math.max(0, numberOrZero(source.baseAtk)),
+        baseDef: Math.max(0, numberOrZero(source.baseDef)),
+        atk: Math.max(0, numberOrZero(source.atk)),
+        def: Math.max(0, numberOrZero(source.def)),
+        baseLevel: Math.max(0, numberOrZero(source.baseLevel)),
+        level: Math.max(0, numberOrZero(source.level)),
+        baseRank: Math.max(0, numberOrZero(source.baseRank)),
+        rank: Math.max(0, numberOrZero(source.rank)),
+        linkRating: Math.max(0, numberOrZero(source.linkRating)),
+        baseAttribute: Object.hasOwn(ATTRIBUTES, source.baseAttribute) ? source.baseAttribute : "",
+        attribute: Object.hasOwn(ATTRIBUTES, source.attribute) ? source.attribute : "",
+        baseRace: typeof source.baseRace === "string" ? source.baseRace.slice(0, 32) : "",
+        race: typeof source.race === "string" ? source.race.slice(0, 32) : "",
+        position: ["attack", "defense", "setDefense"].includes(source.position) ? source.position : "attack",
+        baseScaleLeft: Math.max(0, numberOrZero(source.baseScaleLeft)),
+        scaleLeft: Math.max(0, numberOrZero(source.scaleLeft)),
+        baseScaleRight: Math.max(0, numberOrZero(source.baseScaleRight)),
+        scaleRight: Math.max(0, numberOrZero(source.scaleRight)),
+        counters: normalizeCounters(source.counters)
+      };
+      if (normalized.type === "link") normalized.position = "attack";
+      return normalized;
+    }
+
+    function normalizeZoneCard(card, fallbackKind = "") {
+      const source = card && typeof card === "object" ? card : {};
+      return {
+        name: typeof source.name === "string" ? source.name.slice(0, 40) : "",
+        kind: Object.hasOwn(SPELL_TRAP_TYPES, source.kind) || source.kind === "field" ? source.kind : fallbackKind,
+        faceUp: Boolean(source.faceUp),
+        effectNegated: Boolean(source.effectNegated),
+        equippedTo: typeof source.equippedTo === "string" ? source.equippedTo.slice(0, 40) : "",
+        equippedToOwner: source.equippedToOwner === "extraMonster" ? "extraMonster" : source.equippedToOwner === "monster" ? "monster" : null,
+        equippedToPlayer: source.equippedToPlayer === 1 ? 1 : source.equippedToPlayer === 0 ? 0 : null,
+        equippedToMonster: Number.isInteger(source.equippedToMonster) && source.equippedToMonster >= 0 && source.equippedToMonster < 5 ? source.equippedToMonster : null,
+        equippedToExtra: Number.isInteger(source.equippedToExtra) && source.equippedToExtra >= 0 && source.equippedToExtra < 2 ? source.equippedToExtra : null,
+        counters: normalizeCounters(source.counters)
+      };
+    }
+
+    function normalizeExtraMonsterZone(zone) {
+      const source = zone && typeof zone === "object" ? zone : {};
+      return {
+        ownerIndex: source.ownerIndex === 0 || source.ownerIndex === 1 ? source.ownerIndex : null,
+        monster: normalizeMonster(source.monster)
+      };
+    }
+
     function loadState() {
       try {
         const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
         if (!saved || !Array.isArray(saved.players) || saved.players.length !== 2) {
           return newGameState();
         }
+        const savedTurn = saved.turn && typeof saved.turn === "object" ? saved.turn : {};
+        const firstPlayerIndex = savedTurn.firstPlayerIndex === 1 ? 1 : 0;
+        const currentPlayerIndex = savedTurn.currentPlayerIndex === 1 ? 1 : firstPlayerIndex;
+        const turnNumber = Math.max(1, numberOrZero(savedTurn.turnNumber) || 1);
+        const phase = Object.hasOwn(PHASES, savedTurn.phase) ? savedTurn.phase : "draw";
+        const validHistory = Array.isArray(savedTurn.phaseHistory)
+          ? savedTurn.phaseHistory.filter((phaseName) => Object.hasOwn(PHASES, phaseName))
+          : [];
+        const phaseHistory = validHistory.length && validHistory[validHistory.length - 1] === phase
+          ? validHistory
+          : [phase];
         return {
           players: saved.players.map((player, playerIndex) => ({
             name: typeof player.name === "string" ? player.name : `Jugador ${playerIndex + 1}`,
             lp: Number.isFinite(Number(player.lp)) ? Number(player.lp) : 8000,
-            monsters: Array.from({ length: 5 }, (_, monsterIndex) => {
-              const monster = player.monsters && player.monsters[monsterIndex]
-                ? player.monsters[monsterIndex]
-                : emptyMonster();
-              return {
-                name: typeof monster.name === "string" ? monster.name : "",
-                baseAtk: numberOrZero(monster.baseAtk),
-                baseDef: numberOrZero(monster.baseDef),
-                atk: numberOrZero(monster.atk),
-                def: numberOrZero(monster.def)
-              };
-            })
-          }))
+            monsters: Array.from({ length: 5 }, (_, monsterIndex) =>
+              normalizeMonster(player.monsters?.[monsterIndex])),
+            spellTraps: Array.from({ length: 5 }, (_, cardIndex) =>
+              normalizeZoneCard(player.spellTraps?.[cardIndex])),
+            fieldSpell: normalizeZoneCard(player.fieldSpell, "field")
+          })),
+          extraMonsterZones: Array.from({ length: 2 }, (_, index) => normalizeExtraMonsterZone(saved.extraMonsterZones?.[index])),
+          turn: { turnNumber, firstPlayerIndex, currentPlayerIndex, phase, phaseHistory }
         };
       } catch (error) {
         console.warn("No se pudo recuperar la partida guardada:", error);
@@ -251,6 +703,17 @@
     }
 
     let gameState = loadState();
+    const firstPlayerSelect = document.getElementById("first-player");
+    const FIRST_PLAYER_PREFERENCE_KEY = "duel-companion-first-player-v1";
+    let nextFirstPlayerIndex = (() => {
+      try {
+        const stored = localStorage.getItem(FIRST_PLAYER_PREFERENCE_KEY);
+        return stored === "1" ? 1 : stored === "0" ? 0 : gameState.turn.firstPlayerIndex;
+      } catch {
+        return gameState.turn.firstPlayerIndex;
+      }
+    })();
+    firstPlayerSelect.value = String(nextFirstPlayerIndex);
 
     function saveState() {
       try {
@@ -272,146 +735,682 @@
       return Number(value).toLocaleString("es-AR");
     }
 
-    function renderMonster(monster, playerIndex, monsterIndex) {
-      const name = escapeHtml(monster.name);
+    function isOpeningTurn() {
+      const turn = gameState.turn;
+      return turn.turnNumber === 1 && turn.currentPlayerIndex === turn.firstPlayerIndex;
+    }
+
+    function getPhaseSequence() {
+      return isOpeningTurn()
+        ? ["draw", "standby", "main1", "end"]
+        : STANDARD_PHASE_SEQUENCE;
+    }
+
+    function setPhase(phase) {
+      if (!Object.hasOwn(PHASES, phase)) return;
+      gameState.turn.phase = phase;
+      const history = gameState.turn.phaseHistory;
+      if (history[history.length - 1] !== phase) history.push(phase);
+      render();
+    }
+
+    function previousPhase() {
+      const history = gameState.turn.phaseHistory;
+      if (history.length <= 1) return;
+      history.pop();
+      gameState.turn.phase = history[history.length - 1];
+      render();
+    }
+
+    function nextPhase() {
+      const { phase } = gameState.turn;
+      if (phase === "end") {
+        gameState.turn.currentPlayerIndex = 1 - gameState.turn.currentPlayerIndex;
+        gameState.turn.turnNumber += 1;
+        gameState.turn.phase = "draw";
+        gameState.turn.phaseHistory = ["draw"];
+      } else if (phase === "draw") {
+        setPhase("standby");
+        return;
+      } else if (phase === "standby") {
+        setPhase("main1");
+        return;
+      } else if (phase === "main1") {
+        setPhase(isOpeningTurn() ? "end" : "battle");
+        return;
+      } else if (phase === "battle") {
+        setPhase("main2");
+        return;
+      } else if (phase === "main2") {
+        setPhase("end");
+        return;
+      }
+      render();
+    }
+
+    function renderPhaseTracker() {
+      const tracker = document.getElementById("phase-tracker");
+      const turn = gameState.turn;
+      const sequence = getPhaseSequence();
+      const phaseIndex = Math.max(0, sequence.indexOf(turn.phase));
+      const phaseInfo = PHASES[turn.phase];
+      const currentPlayer = gameState.players[turn.currentPlayerIndex];
+      const openingTurn = isOpeningTurn();
+      const isMain1 = turn.phase === "main1";
+      const canSkipToEnd = (isMain1 && !openingTurn) || turn.phase === "battle";
+      const nextLabels = {
+        draw: "Standby Phase",
+        standby: "Main Phase 1",
+        main1: openingTurn ? "End Phase" : "Battle Phase",
+        battle: "Main Phase 2",
+        main2: "End Phase",
+        end: "Terminar turno"
+      };
+      const steps = sequence.map((phaseName, index) => {
+        const info = PHASES[phaseName];
+        const className = index < phaseIndex ? "done" : index === phaseIndex ? "current" : "";
+        const currentAttribute = index === phaseIndex ? ' aria-current="step"' : "";
+        return `<li class="phase-step ${className}"${currentAttribute}><span class="phase-step-number">${index + 1}</span><span class="phase-step-label">${info.label}</span></li>`;
+      }).join("");
+      let reminder = "";
+      if (openingTurn && turn.phase === "draw") {
+        reminder = '<div class="phase-reminder">Primer turno del duelo: el jugador que comienza no roba su carta normal en esta Draw Phase.</div>';
+      } else if (openingTurn && turn.phase === "main1") {
+        reminder = '<div class="phase-reminder">Primer turno del duelo: el jugador que comienza no puede realizar Battle Phase. Al avanzar, pasarás directamente a End Phase.</div>';
+      } else if (turn.phase === "main1") {
+        reminder = '<div class="phase-reminder">Podés entrar en Battle Phase o terminar tu turno directamente. Si no realizás Battle Phase, no hay Main Phase 2.</div>';
+      } else if (turn.phase === "battle") {
+        reminder = '<div class="phase-reminder">Al terminar la batalla, elegí Main Phase 2 o End Phase. Si pasás directamente a End Phase, no habrá Main Phase 2.</div>';
+      }
+      tracker.innerHTML = `
+        <div class="phase-heading">
+          <div>
+            <p class="eyebrow">TURNO ACTUAL · JUGADOR ACTIVO</p>
+            <h2>${escapeHtml(currentPlayer.name)}</h2>
+            <p class="turn-meta">Turno ${turn.turnNumber} · ${openingTurn ? "Primer turno de la partida" : "Turno en curso"}</p>
+          </div>
+          <span class="phase-counter">Fase ${phaseIndex + 1} de ${sequence.length}</span>
+        </div>
+        <ol class="phase-track" aria-label="Progreso de las fases">${steps}</ol>
+        <div class="phase-detail" aria-live="polite">
+          <p class="eyebrow">FASE ACTUAL</p>
+          <h3>${phaseInfo.label} · ${phaseInfo.spanish}</h3>
+          <p>${phaseInfo.description}</p>
+          ${reminder}
+        </div>
+        <div class="phase-controls">
+          <button type="button" id="previous-phase" ${turn.phaseHistory.length <= 1 ? "disabled" : ""}>← Anterior</button>
+          <div class="phase-controls-right">
+            <button type="button" id="skip-phase" ${canSkipToEnd ? "" : "hidden"}>Ir a End Phase</button>
+            <button type="button" id="next-phase" class="phase-primary">${nextLabels[turn.phase]}</button>
+          </div>
+        </div>
+        <details class="phase-help">
+          <summary>Guía rápida: cómo avanzar por el turno</summary>
+          <ul>
+            <li><strong>Draw Phase:</strong> robá 1 carta, excepto quien comienza durante su primer turno.</li>
+            <li><strong>Standby Phase:</strong> resolvé los efectos y costes que correspondan a esta fase.</li>
+            <li><strong>Main Phase 1:</strong> prepará tu campo. Después elegís si entrás en Battle Phase.</li>
+            <li><strong>Battle Phase:</strong> declarás ataques y resolvés las batallas. No está disponible para quien comienza en su primer turno.</li>
+            <li><strong>Main Phase 2:</strong> solo se alcanza después de realizar Battle Phase.</li>
+            <li><strong>End Phase:</strong> resolvé los efectos de fin de turno y pasá el turno al rival.</li>
+          </ul>
+          <p>Este indicador es una ayuda para orientarse: no activa efectos ni reemplaza el texto de las cartas o el reglamento oficial.</p>
+        </details>`;
+
+      document.getElementById("previous-phase").addEventListener("click", previousPhase);
+      document.getElementById("next-phase").addEventListener("click", nextPhase);
+      const skipButton = document.getElementById("skip-phase");
+      skipButton.addEventListener("click", () => setPhase("end"));
+    }
+
+    firstPlayerSelect.addEventListener("change", () => {
+      nextFirstPlayerIndex = Number(firstPlayerSelect.value) === 1 ? 1 : 0;
+      try {
+        localStorage.setItem(FIRST_PLAYER_PREFERENCE_KEY, String(nextFirstPlayerIndex));
+      } catch (error) {
+        console.warn("No se pudo guardar quién comienza el próximo duelo:", error);
+      }
+      saveStatus.textContent = "El jugador inicial se aplicará al próximo duelo.";
+    });
+
+    function renderOptions(options, selected, placeholder = "Sin especificar") {
+      return `<option value="">${placeholder}</option>` + Object.entries(options).map(([value, label]) =>
+        `<option value="${value}" ${selected === value ? "selected" : ""}>${escapeHtml(label)}</option>`
+      ).join("");
+    }
+
+    const editorDialog = document.getElementById("card-editor");
+    const editorContent = document.getElementById("editor-content");
+    let activeEditor = null;
+
+    function getTrackedCard(player, owner, slotIndex) {
+      if (owner === "extraMonster") return gameState.extraMonsterZones[slotIndex]?.monster || null;
+      if (!player) return null;
+      if (owner === "monster") return player.monsters[slotIndex] || null;
+      if (owner === "spelltrap") return player.spellTraps[slotIndex] || null;
+      if (owner === "field") return player.fieldSpell || null;
+      return null;
+    }
+
+    function getEditorPlayerIndex() {
+      if (!activeEditor) return 0;
+      if (activeEditor.owner === "extraMonster") {
+        return gameState.extraMonsterZones[activeEditor.slotIndex]?.ownerIndex ?? gameState.turn.currentPlayerIndex;
+      }
+      return activeEditor.playerIndex;
+    }
+
+    function getEditorCard() {
+      if (!activeEditor) return null;
+      if (activeEditor.owner === "extraMonster") return gameState.extraMonsterZones[activeEditor.slotIndex]?.monster || null;
+      return getTrackedCard(gameState.players[activeEditor.playerIndex], activeEditor.owner, activeEditor.slotIndex);
+    }
+
+    function renderCounters(card, playerIndex, owner, slotIndex) {
+      const attrs = `data-player="${playerIndex}" data-owner="${owner}" data-slot="${slotIndex}"`;
+      const counters = card.counters || [];
+      const rows = counters.map((counter, counterIndex) => `
+        <div class="counter-item">
+          <span class="counter-name">${escapeHtml(counter.name)}</span>
+          <button type="button" aria-label="Quitar un contador" data-action="counter-change" data-counter="${counterIndex}" data-sign="-1" ${attrs}>−</button>
+          <span class="counter-count">${formatNumber(counter.count)}</span>
+          <button type="button" aria-label="Añadir un contador" data-action="counter-change" data-counter="${counterIndex}" data-sign="1" ${attrs}>+</button>
+          <button type="button" class="counter-remove" aria-label="Eliminar tipo de contador" data-action="counter-remove" data-counter="${counterIndex}" ${attrs}>×</button>
+        </div>`).join("");
       return `
-        <article class="monster">
-          <div class="monster-head">
-            <span class="monster-index">MONSTRUO ${monsterIndex + 1}</span>
-            <button class="tiny-button" type="button" data-action="restore-monster" data-player="${playerIndex}" data-monster="${monsterIndex}">Restaurar ATK/DEF</button>
+        <details class="counter-details" data-editor-detail="counters">
+          <summary>Contadores (${counters.length})</summary>
+          <div class="counter-add">
+            <input type="text" maxlength="32" placeholder="Nombre del contador" aria-label="Nombre del contador" data-counter-input="${owner}-${slotIndex}">
+            <button type="button" data-action="counter-add" ${attrs}>Agregar</button>
           </div>
-          <label class="field-label" for="monster-${playerIndex}-${monsterIndex}-name">Nombre (opcional)</label>
-          <input class="monster-name" id="monster-${playerIndex}-${monsterIndex}-name" type="text" maxlength="40" placeholder="Nombre del monstruo" value="${name}" data-field="monsterName" data-player="${playerIndex}" data-monster="${monsterIndex}">
-          <div class="base-grid">
-            <label><span class="field-label">ATK original</span><input type="number" inputmode="numeric" step="1" min="0" value="${monster.baseAtk || ""}" placeholder="—" data-field="baseAtk" data-player="${playerIndex}" data-monster="${monsterIndex}"></label>
-            <label><span class="field-label">DEF original</span><input type="number" inputmode="numeric" step="1" min="0" value="${monster.baseDef || ""}" placeholder="—" data-field="baseDef" data-player="${playerIndex}" data-monster="${monsterIndex}"></label>
-          </div>
-          <div class="current-grid">
-            <div class="stat-box">
-              <span class="field-label">ATK ACTUAL</span>
-              <strong class="stat-value">${formatNumber(monster.atk)}</strong>
-              <div class="stat-controls">
-                <button type="button" aria-label="Restar ATK" data-action="stat" data-stat="atk" data-sign="-1" data-player="${playerIndex}" data-monster="${monsterIndex}">−</button>
-                <button type="button" aria-label="Sumar ATK" data-action="stat" data-stat="atk" data-sign="1" data-player="${playerIndex}" data-monster="${monsterIndex}">+</button>
-              </div>
-            </div>
-            <div class="stat-box">
-              <span class="field-label">DEF ACTUAL</span>
-              <strong class="stat-value">${formatNumber(monster.def)}</strong>
-              <div class="stat-controls">
-                <button type="button" aria-label="Restar DEF" data-action="stat" data-stat="def" data-sign="-1" data-player="${playerIndex}" data-monster="${monsterIndex}">−</button>
-                <button type="button" aria-label="Sumar DEF" data-action="stat" data-stat="def" data-sign="1" data-player="${playerIndex}" data-monster="${monsterIndex}">+</button>
-              </div>
-            </div>
-          </div>
-        </article>`;
+          <div class="counter-list">${rows || '<p class="property-note">Todavía no hay contadores registrados.</p>'}</div>
+          <p class="property-note">Agregá contadores solo cuando un efecto de carta permita colocarlos.</p>
+        </details>`;
+    }
+
+    function cardHasName(monster) {
+      return Boolean(monster && monster.name && monster.name.trim());
+    }
+
+    function isMonsterRegistered(monster) {
+      return Boolean(monster && (
+        cardHasName(monster) || monster.type || monster.atk > 0 || monster.def > 0 ||
+        monster.baseAtk > 0 || monster.baseDef > 0 || monster.level > 0 || monster.rank > 0 ||
+        monster.linkRating > 0 || monster.isPendulum || monster.effectNegated || (monster.counters?.length || 0) > 0
+      ));
+    }
+
+    function getEquipmentForMonster(playerIndex, monsterIndex, owner = "monster", extraIndex = null) {
+      const equipment = [];
+      gameState.players.forEach((player, ownerIndex) => {
+        player.spellTraps.forEach((card) => {
+          if (card.kind !== "spellEquip" || !card.faceUp) return;
+          const matchesMain = card.equippedToOwner === "monster" && card.equippedToPlayer === playerIndex && card.equippedToMonster === monsterIndex;
+          const matchesExtra = owner === "extraMonster" && card.equippedToOwner === "extraMonster" && card.equippedToExtra === extraIndex;
+          if (matchesMain || matchesExtra) equipment.push(card.name.trim() || "Mágica de Equipo");
+        });
+      });
+      return equipment;
+    }
+
+    function renderMonsterSlot(monster, playerIndex, monsterIndex) {
+      const occupied = isMonsterRegistered(monster);
+      const isLink = monster.type === "link";
+      const isXyz = monster.type === "xyz";
+      const positionClass = monster.position === "defense" || monster.position === "setDefense" ? "defense" : "attack";
+      const faceDown = monster.position === "setDefense";
+      const title = faceDown ? "Monstruo colocado" : (monster.name.trim() || (occupied ? "Monstruo" : "Zona vacía"));
+      const typeLabel = MONSTER_TYPES[monster.type]?.label || (occupied ? "Monstruo" : "Añadir");
+      const statLine = occupied && !faceDown
+        ? `<span class="slot-stats">${formatNumber(monster.atk)} ATK${!isLink ? ` · ${formatNumber(monster.def)} DEF` : ""}</span>` : "";
+      const equipment = getEquipmentForMonster(playerIndex, monsterIndex);
+      const badges = [monster.effectNegated && !faceDown ? '<span class="slot-badge negated">Efecto negado</span>' : "",
+        monster.isPendulum && !faceDown ? '<span class="slot-badge">Péndulo</span>' : "",
+        equipment.length && !faceDown ? `<span class="slot-badge equip-badge">Equipado ×${equipment.length}</span>` : ""].filter(Boolean).join("");
+      const glyph = faceDown ? `<span class="card-glyph back ${positionClass}"></span>` : `<span class="card-glyph ${positionClass}"></span>`;
+      return `
+        <button type="button" class="board-slot monster-slot ${occupied ? "occupied" : "empty"} ${positionClass} ${faceDown ? "face-down" : ""}" data-open-editor="monster" data-player="${playerIndex}" data-slot="${monsterIndex}" aria-label="${escapeHtml(`Jugador ${playerIndex + 1}, zona de monstruos ${monsterIndex + 1}: ${title}`)}">
+          <span class="slot-topline"><span>M${monsterIndex + 1}</span>${glyph}</span>
+          <span class="slot-title">${escapeHtml(title)}</span>
+          <span class="slot-kind">${faceDown ? "Colocado" : escapeHtml(typeLabel)}</span>
+          ${statLine}
+          ${badges ? `<span class="slot-badges">${badges}</span>` : ""}
+          ${!occupied ? '<span class="slot-add">＋</span>' : '<span class="slot-edit-hint">Editar</span>'}
+        </button>`;
+    }
+
+    function getEquipTargetLabel(card) {
+      if (card.equippedToOwner === "extraMonster" && Number.isInteger(card.equippedToExtra)) {
+        const zone = gameState.extraMonsterZones[card.equippedToExtra];
+        const targetName = zone?.monster?.name?.trim() || `EMZ ${card.equippedToExtra + 1}`;
+        return `J${(zone?.ownerIndex ?? 0) + 1} · ${targetName}`;
+      }
+      if (card.equippedToOwner !== "monster" || card.equippedToPlayer === null || card.equippedToMonster === null) return "Sin objetivo";
+      const targetPlayer = gameState.players[card.equippedToPlayer];
+      const targetMonster = targetPlayer?.monsters[card.equippedToMonster];
+      const targetName = targetMonster?.name?.trim() || `Monstruo ${card.equippedToMonster + 1}`;
+      return `J${card.equippedToPlayer + 1} · ${targetName}`;
+    }
+
+    function renderSpellTrapSlot(card, playerIndex, slotIndex) {
+      const occupied = Boolean(card.name.trim() || card.kind);
+      const hidden = occupied && !card.faceUp;
+      const label = hidden ? "Carta colocada" : (card.name.trim() || SPELL_TRAP_TYPES[card.kind] || "Carta");
+      const typeLabel = hidden ? "Boca abajo" : (SPELL_TRAP_TYPES[card.kind] || "Zona vacía");
+      const isPendulumZone = slotIndex === 0 || slotIndex === 4;
+      const isContinuous = card.kind === "spellContinuous" || card.kind === "trapContinuous";
+      const equipBadge = card.kind === "spellEquip" && card.faceUp
+        ? `<span class="slot-badge equip-badge">Equipo → ${escapeHtml(getEquipTargetLabel(card))}</span>` : "";
+      const badges = [isContinuous && card.faceUp ? '<span class="slot-badge">Continua</span>' : "",
+        card.effectNegated && card.faceUp ? '<span class="slot-badge negated">Efecto negado</span>' : "", equipBadge].filter(Boolean).join("");
+      const glyph = hidden ? '<span class="card-glyph back small"></span>' : '<span class="spell-glyph"></span>';
+      return `
+        <button type="button" class="board-slot spell-slot ${occupied ? "occupied" : "empty"} ${hidden ? "face-down" : ""}" data-open-editor="spelltrap" data-player="${playerIndex}" data-slot="${slotIndex}" aria-label="${escapeHtml(`Jugador ${playerIndex + 1}, Zona de Mágicas y Trampas ${slotIndex + 1}: ${label}`)}">
+          <span class="slot-topline"><span>${slotIndex + 1}</span>${glyph}</span>
+          ${isPendulumZone ? '<span class="pendulum-zone-label">Péndulo</span>' : ""}
+          <span class="slot-title">${escapeHtml(label)}</span>
+          <span class="slot-kind">${escapeHtml(typeLabel)}</span>
+          ${badges ? `<span class="slot-badges">${badges}</span>` : ""}
+          ${!occupied ? '<span class="slot-add">＋</span>' : '<span class="slot-edit-hint">Editar</span>'}
+        </button>`;
+    }
+
+    function renderFieldZone(card, playerIndex) {
+      const occupied = Boolean(card.name.trim());
+      const hidden = occupied && !card.faceUp;
+      const label = hidden ? "Mágica colocada" : (card.name.trim() || "Zona de Campo vacía");
+      return `
+        <button type="button" class="board-slot field-slot ${occupied ? "occupied" : "empty"} ${hidden ? "face-down" : ""}" data-open-editor="field" data-player="${playerIndex}" data-slot="0" aria-label="${escapeHtml(`Jugador ${playerIndex + 1}, Zona de Campo: ${label}`)}">
+          <span class="field-slot-icon">✦</span>
+          <span class="slot-title">${escapeHtml(label)}</span>
+          <span class="slot-kind">Zona de Campo</span>
+          ${card.effectNegated && card.faceUp ? '<span class="slot-badge negated">Efecto negado</span>' : ""}
+          ${!occupied ? '<span class="slot-add">＋</span>' : '<span class="slot-edit-hint">Editar</span>'}
+        </button>`;
+    }
+
+    function renderAuxiliaryZones(playerIndex) {
+      return `
+        <div class="aux-zones" aria-label="Zonas de mazos y cementerio, referencia visual">
+          <span>Deck</span><span>Extra Deck</span><span>Cementerio</span><span>Desterradas</span>
+        </div>`;
+    }
+
+    function renderLifeControls(player, playerIndex) {
+      return `
+        <div class="life-controls">
+          <button type="button" data-action="life" data-delta="-1000" data-player="${playerIndex}" aria-label="Restar 1000 puntos de vida">−1000</button>
+          <button type="button" data-action="life" data-delta="-500" data-player="${playerIndex}" aria-label="Restar 500 puntos de vida">−500</button>
+          <button type="button" data-action="life" data-delta="500" data-player="${playerIndex}" aria-label="Sumar 500 puntos de vida">+500</button>
+          <button type="button" data-action="life" data-delta="1000" data-player="${playerIndex}" aria-label="Sumar 1000 puntos de vida">+1000</button>
+          <details class="custom-life-details"><summary>Ajustar LP</summary><div class="custom-life"><input type="number" min="0" step="1" inputmode="numeric" placeholder="Cantidad" aria-label="Otra cantidad de puntos de vida" class="custom-life-amount"><button type="button" data-action="custom-life" data-sign="-1" data-player="${playerIndex}">− Aplicar</button><button type="button" data-action="custom-life" data-sign="1" data-player="${playerIndex}">+ Aplicar</button></div></details>
+        </div>`;
     }
 
     function renderPlayer(player, playerIndex) {
+      const name = escapeHtml(player.name);
+      const monsterRow = `<div class="zone-row monster-row" aria-label="Zonas de monstruos">${player.monsters.map((monster, monsterIndex) => renderMonsterSlot(monster, playerIndex, monsterIndex)).join("")}</div>`;
+      const spellRow = `<div class="zone-row spell-row" aria-label="Zonas de Mágicas y Trampas">${player.spellTraps.map((card, slotIndex) => renderSpellTrapSlot(card, playerIndex, slotIndex)).join("")}</div>`;
+      const fieldZone = renderFieldZone(player.fieldSpell, playerIndex);
       return `
-        <section class="player-card" aria-label="${escapeHtml(player.name)}">
-          <div class="player-heading">
-            <span class="player-number">J${playerIndex + 1}</span>
-            <input type="text" maxlength="24" aria-label="Nombre del jugador ${playerIndex + 1}" value="${escapeHtml(player.name)}" data-field="playerName" data-player="${playerIndex}">
-          </div>
-          <div class="life-box">
-            <div class="life-label"><span>PUNTOS DE VIDA</span><span>Inicio: 8000</span></div>
-            <output class="life-total" aria-label="Puntos de vida">${formatNumber(player.lp)}</output>
-            <div class="quick-life">
-              <button type="button" data-action="life" data-delta="-1000" data-player="${playerIndex}">−1000</button>
-              <button type="button" data-action="life" data-delta="-500" data-player="${playerIndex}">−500</button>
-              <button type="button" data-action="life" data-delta="500" data-player="${playerIndex}">+500</button>
-              <button type="button" data-action="life" data-delta="1000" data-player="${playerIndex}">+1000</button>
+        <section class="player-board ${playerIndex === 0 ? "opponent-board" : "local-board"}" aria-label="Campo de ${name}">
+          <header class="board-player-heading">
+            <div class="board-player-name"><span class="player-number">J${playerIndex + 1}</span><input type="text" maxlength="24" aria-label="Nombre del jugador ${playerIndex + 1}" value="${name}" data-field="playerName" data-player="${playerIndex}"></div>
+            <div class="lp-display"><span>LP</span><output class="life-total">${formatNumber(player.lp)}</output></div>
+          </header>
+          ${renderLifeControls(player, playerIndex)}
+          <div class="board-side-layout">
+            <div class="board-field-main">
+              ${playerIndex === 0 ? spellRow + monsterRow : monsterRow + spellRow}
             </div>
-            <div class="custom-life">
-              <input type="number" min="0" step="1" inputmode="numeric" placeholder="Otra cantidad" aria-label="Otra cantidad de puntos de vida" class="custom-life-amount">
-              <button type="button" data-action="custom-life" data-sign="-1" data-player="${playerIndex}">− Aplicar</button>
-              <button type="button" data-action="custom-life" data-sign="1" data-player="${playerIndex}">+ Aplicar</button>
-            </div>
-          </div>
-          <div class="section-heading">
-            <h2>Zona de monstruos</h2>
-          </div>
-          <div class="monster-list">
-            ${player.monsters.map((monster, monsterIndex) => renderMonster(monster, playerIndex, monsterIndex)).join("")}
+            <aside class="board-side-zones" title="Las pilas auxiliares se muestran como referencia; sus contenidos no se administran en esta versión.">
+              ${fieldZone}
+              ${renderAuxiliaryZones(playerIndex)}
+            </aside>
           </div>
         </section>`;
     }
 
+    function renderExtraMonsterZones() {
+      return `
+        <section class="shared-extra-zones" aria-label="Zonas de Monstruos Extra compartidas">
+          <div class="shared-extra-heading"><span class="shared-line"></span><span>ZONAS DE MONSTRUOS EXTRA · COMPARTIDAS</span><span class="shared-line"></span></div>
+          <div class="extra-zone-row">
+            ${gameState.extraMonsterZones.map((zone, index) => {
+              const occupied = isMonsterRegistered(zone.monster);
+              const ownerName = zone.ownerIndex === null ? "Sin ocupar" : gameState.players[zone.ownerIndex].name;
+              const hidden = occupied && zone.monster.position === "setDefense";
+              const label = hidden ? "Monstruo colocado" : (zone.monster.name.trim() || (occupied ? "Monstruo" : "Zona libre"));
+              const equipment = getEquipmentForMonster(zone.ownerIndex ?? 0, 0, "extraMonster", index);
+              return `<button type="button" class="extra-zone-slot ${occupied ? "occupied" : "empty"}" data-open-editor="extraMonster" data-player="${zone.ownerIndex ?? gameState.turn.currentPlayerIndex}" data-slot="${index}" aria-label="Zona de Monstruos Extra ${index + 1}: ${escapeHtml(label)}">
+                <span class="extra-zone-number">EMZ ${index + 1}</span>
+                <strong>${escapeHtml(label)}</strong>
+                <small>${occupied ? `J${zone.ownerIndex + 1} · ${hidden ? "Boca abajo" : `${formatNumber(zone.monster.atk)} ATK`}` : ownerName}</small>
+                ${equipment.length && !hidden ? `<small class="equip-target-indicator">Equipado ×${equipment.length}</small>` : ""}
+                ${!occupied ? '<span class="slot-add">＋</span>' : '<span class="slot-edit-hint">Editar</span>'}
+              </button>`;
+            }).join("")}
+          </div>
+          <p class="extra-zone-note">Son zonas compartidas: normalmente cada jugador ocupa como máximo una. Las restricciones de Invocación dependen del tipo de monstruo y de las reglas aplicables.</p>
+        </section>`;
+    }
+
+    function renderBoard() {
+      playersElement.innerHTML = `${renderPlayer(gameState.players[0], 0)}${renderExtraMonsterZones()}${renderPlayer(gameState.players[1], 1)}`;
+    }
+
     function render() {
-      playersElement.innerHTML = gameState.players.map(renderPlayer).join("");
+      renderBoard();
+      renderPhaseTracker();
+      if (activeEditor && editorDialog.open) renderEditor();
       saveState();
     }
 
-    function getIndexes(element) {
-      return {
-        playerIndex: Number.parseInt(element.dataset.player, 10),
-        monsterIndex: Number.parseInt(element.dataset.monster, 10)
-      };
+    function renderMonsterEditor(monster, playerIndex, owner, slotIndex) {
+      const isLink = monster.type === "link";
+      const isXyz = monster.type === "xyz";
+      const attrs = `data-player="${playerIndex}" data-owner="${owner}" data-slot="${slotIndex}"`;
+      const typeOptions = renderOptions(Object.fromEntries(Object.entries(MONSTER_TYPES).map(([key, value]) => [key, value.label])), monster.type, "Elegir tipo");
+      const posOptions = `<option value="attack" ${monster.position === "attack" ? "selected" : ""}>Ataque · boca arriba</option><option value="defense" ${monster.position === "defense" ? "selected" : ""} ${isLink ? "disabled" : ""}>Defensa · boca arriba</option><option value="setDefense" ${monster.position === "setDefense" ? "selected" : ""} ${isLink ? "disabled" : ""}>Defensa · boca abajo</option>`;
+      const originalLevelMarkup = isLink
+        ? `<label><span class="field-label">Valor de Enlace</span><input type="number" min="1" max="6" step="1" value="${monster.linkRating || ""}" data-field="linkRating" ${attrs}></label>`
+        : `<label><span class="field-label">${isXyz ? "Rango original" : "Nivel original"}</span><input type="number" min="0" step="1" value="${isXyz ? (monster.baseRank || "") : (monster.baseLevel || "")}" data-field="${isXyz ? "baseRank" : "baseLevel"}" ${attrs}></label><label><span class="field-label">${isXyz ? "Rango actual" : "Nivel actual"}</span><input type="number" min="0" step="1" value="${isXyz ? (monster.rank || "") : (monster.level || "")}" data-field="${isXyz ? "rank" : "level"}" ${attrs}></label>`;
+      const defBase = isLink ? "" : `<label><span class="field-label">DEF original</span><input type="number" min="0" step="1" value="${monster.baseDef || ""}" data-field="baseDef" ${attrs}></label>`;
+      const defCurrent = isLink ? "" : `<div class="stat-box"><span class="field-label">DEF actual</span><strong class="stat-value">${formatNumber(monster.def)}</strong><div class="stat-controls"><button type="button" data-action="stat" data-stat="def" data-sign="-1" ${attrs}>−</button><button type="button" data-action="stat" data-stat="def" data-sign="1" ${attrs}>+</button></div></div>`;
+      const info = MONSTER_TYPES[monster.type];
+      const pendulumMarkup = monster.isPendulum ? `<div class="scale-grid"><label><span class="field-label">Escala izquierda original</span><input type="number" min="0" step="1" value="${monster.baseScaleLeft || ""}" data-field="baseScaleLeft" ${attrs}></label><label><span class="field-label">Escala izquierda actual</span><input type="number" min="0" step="1" value="${monster.scaleLeft || ""}" data-field="scaleLeft" ${attrs}></label><label><span class="field-label">Escala derecha original</span><input type="number" min="0" step="1" value="${monster.baseScaleRight || ""}" data-field="baseScaleRight" ${attrs}></label><label><span class="field-label">Escala derecha actual</span><input type="number" min="0" step="1" value="${monster.scaleRight || ""}" data-field="scaleRight" ${attrs}></label></div>` : "";
+      const ownerMarkup = owner === "extraMonster" ? `<label class="full-span"><span class="field-label">Controlado por</span><select data-field="extraOwner" ${attrs}><option value="0" ${playerIndex === 0 ? "selected" : ""}>Jugador 1</option><option value="1" ${playerIndex === 1 ? "selected" : ""}>Jugador 2</option></select></label>` : "";
+      return `
+        <div class="editor-header"><div><p class="eyebrow">ZONA DE MONSTRUOS · ${owner === "extraMonster" ? `EMZ ${slotIndex + 1}` : `M${slotIndex + 1}`}</p><h2 id="editor-title">${cardHasName(monster) ? escapeHtml(monster.name) : "Registrar monstruo"}</h2></div><button type="button" class="icon-close" data-action="close-editor" aria-label="Cerrar">×</button></div>
+        <div class="editor-body">
+          ${ownerMarkup}
+          <label class="full-span"><span class="field-label">Nombre de la carta</span><input type="text" maxlength="40" placeholder="Nombre del monstruo" value="${escapeHtml(monster.name)}" data-field="monsterName" ${attrs}></label>
+          <div class="monster-type-row"><label><span class="field-label">Tipo de monstruo</span><select data-field="monsterType" ${attrs}>${typeOptions}</select></label><details class="monster-info" data-editor-detail="info"><summary aria-label="Información del tipo">i</summary><div class="monster-info-content"><strong>${escapeHtml(info?.label || "Tipo de monstruo")}</strong><p>${escapeHtml(info?.description || "Elegí un tipo para consultar cómo se invoca y cuáles son sus características.")}</p></div></details></div>
+          <label class="pendulum-option"><input type="checkbox" data-field="monsterPendulum" ${attrs} ${monster.isPendulum ? "checked" : ""}> También es un monstruo Péndulo</label>
+          <label><span class="field-label">Posición de batalla</span><select data-field="monsterPosition" ${attrs}>${posOptions}</select></label>
+          <div class="effect-status"><button class="effect-toggle ${monster.effectNegated ? "is-negated" : ""}" type="button" data-action="toggle-effect" ${attrs} aria-pressed="${monster.effectNegated}">${monster.effectNegated ? "Efectos negados" : "Efectos no negados"}</button><span class="effect-note">Indicador manual; no aplica ni elimina efectos.</span></div>
+          <div class="editor-subtitle">Estadísticas</div>
+          <div class="base-grid"><label><span class="field-label">ATK original</span><input type="number" min="0" step="1" value="${monster.baseAtk || ""}" data-field="baseAtk" ${attrs}></label>${defBase}</div>
+          <div class="current-grid"><div class="stat-box"><span class="field-label">ATK actual</span><strong class="stat-value">${formatNumber(monster.atk)}</strong><div class="stat-controls"><button type="button" data-action="stat" data-stat="atk" data-sign="-1" ${attrs}>−</button><button type="button" data-action="stat" data-stat="atk" data-sign="1" ${attrs}>+</button></div></div>${defCurrent}</div>
+          <p class="property-note">El valor original se conserva para restaurarlo. El actual registra las modificaciones del duelo.</p>
+          <details class="editor-advanced" data-editor-detail="advanced"><summary>Más características y contadores</summary>
+            <div class="property-grid">${originalLevelMarkup}</div>
+            <div class="advanced-grid"><label><span class="field-label">Atributo original</span><select data-field="baseAttribute" ${attrs}>${renderOptions(ATTRIBUTES, monster.baseAttribute)}</select></label><label><span class="field-label">Atributo actual</span><select data-field="attribute" ${attrs}>${renderOptions(ATTRIBUTES, monster.attribute)}</select></label><label><span class="field-label">Tipo/Raza original</span><input type="text" maxlength="32" value="${escapeHtml(monster.baseRace)}" data-field="baseRace" ${attrs}></label><label><span class="field-label">Tipo/Raza actual</span><input type="text" maxlength="32" value="${escapeHtml(monster.race)}" data-field="race" ${attrs}></label></div>
+            ${pendulumMarkup}
+            ${renderCounters(monster, playerIndex, owner, slotIndex)}
+          </details>
+          <div class="editor-actions"><div class="editor-action-left"><button type="button" data-action="restore-monster" ${attrs}>Restaurar originales</button><button type="button" class="danger" data-action="clear-card" ${attrs}>Retirar</button></div><button type="button" class="phase-primary" data-action="close-editor">Listo</button></div>
+        </div>`;
     }
 
-    playersElement.addEventListener("click", (event) => {
-      const button = event.target.closest("button[data-action]");
-      if (!button) return;
+    function renderEquipTargetOptions(card) {
+      const current = card.equippedToOwner === "extraMonster"
+        ? `extra-${card.equippedToExtra}`
+        : card.equippedToOwner === "monster" && card.equippedToPlayer !== null && card.equippedToMonster !== null
+          ? `main-${card.equippedToPlayer}-${card.equippedToMonster}` : "";
+      let options = '<option value="">Sin monstruo asociado</option>';
+      gameState.players.forEach((player, playerIndex) => {
+        player.monsters.forEach((monster, monsterIndex) => {
+          const occupied = isMonsterRegistered(monster);
+          if (!occupied) return;
+          const title = monster.name.trim() || `Monstruo ${monsterIndex + 1}`;
+          const value = `main-${playerIndex}-${monsterIndex}`;
+          options += `<option value="${value}" ${current === value ? "selected" : ""}>${escapeHtml(player.name)} · ${escapeHtml(title)} (M${monsterIndex + 1})</option>`;
+        });
+      });
+      gameState.extraMonsterZones.forEach((zone, extraIndex) => {
+        const occupied = zone.ownerIndex !== null && isMonsterRegistered(zone.monster);
+        if (!occupied) return;
+        const title = zone.monster.name.trim() || `Monstruo EMZ ${extraIndex + 1}`;
+        const value = `extra-${extraIndex}`;
+        options += `<option value="${value}" ${current === value ? "selected" : ""}>${escapeHtml(gameState.players[zone.ownerIndex].name)} · ${escapeHtml(title)} (EMZ ${extraIndex + 1})</option>`;
+      });
+      return options;
+    }
 
-      const playerIndex = Number.parseInt(button.dataset.player, 10);
+    function renderZoneEditor(card, playerIndex, owner, slotIndex) {
+      const isField = owner === "field";
+      const kindOptions = isField ? '<option value="field" selected>Mágica de Campo</option>' : renderOptions(SPELL_TRAP_TYPES, card.kind, "Elegir clase");
+      const isEquip = card.kind === "spellEquip";
+      const attrs = `data-player="${playerIndex}" data-owner="${owner}" data-slot="${slotIndex}"`;
+      return `
+        <div class="editor-header"><div><p class="eyebrow">${isField ? "ZONA DE CAMPO" : `ZONA DE MÁGICAS Y TRAMPAS · ${slotIndex + 1}`}</p><h2 id="editor-title">${card.name.trim() ? escapeHtml(card.name) : (isField ? "Mágica de Campo" : "Registrar carta")}</h2></div><button type="button" class="icon-close" data-action="close-editor" aria-label="Cerrar">×</button></div>
+        <div class="editor-body">
+          <label class="full-span"><span class="field-label">Nombre de la carta</span><input type="text" maxlength="40" placeholder="Nombre de la carta" value="${escapeHtml(card.name)}" data-field="zoneName" ${attrs}></label>
+          <label><span class="field-label">Clase de carta</span><select data-field="zoneKind" ${attrs} ${isField ? "disabled" : ""}>${kindOptions}</select></label>
+          <label><span class="field-label">Estado</span><select data-field="zoneFaceUp" ${attrs}><option value="false" ${!card.faceUp ? "selected" : ""}>Colocada · boca abajo</option><option value="true" ${card.faceUp ? "selected" : ""}>Boca arriba · activada</option></select></label>
+          ${isEquip ? `<label class="full-span"><span class="field-label">Monstruo equipado</span><select data-field="equippedTarget" ${attrs}>${renderEquipTargetOptions(card)}</select><span class="property-note">Si es posible, colocá esta Mágica de Equipo en la zona situada detrás del monstruo para facilitar su identificación.</span></label>` : ""}
+          <div class="effect-status"><button class="effect-toggle ${card.effectNegated ? "is-negated" : ""}" type="button" data-action="toggle-card-effect" ${attrs} aria-pressed="${card.effectNegated}">${card.effectNegated ? "Efecto negado" : "Efecto no negado"}</button><span class="effect-note">Indicador manual.</span></div>
+          ${renderCounters(card, playerIndex, owner, slotIndex)}
+          <div class="editor-actions"><button type="button" class="danger" data-action="clear-card" ${attrs}>Retirar del campo</button><button type="button" class="phase-primary" data-action="close-editor">Listo</button></div>
+        </div>`;
+    }
+
+    function renderEditor() {
+      if (!activeEditor || !editorDialog.open) return;
+      const frame = editorDialog.querySelector(".editor-frame");
+      const scrollTop = frame?.scrollTop || 0;
+      const openDetails = new Set(Array.from(editorContent.querySelectorAll("details[data-editor-detail][open]"))
+        .map((details) => details.dataset.editorDetail));
+      const playerIndex = getEditorPlayerIndex();
+      const card = getEditorCard();
+      if (!card) return;
+      editorContent.innerHTML = activeEditor.owner === "monster" || activeEditor.owner === "extraMonster"
+        ? renderMonsterEditor(card, playerIndex, activeEditor.owner, activeEditor.slotIndex)
+        : renderZoneEditor(card, playerIndex, activeEditor.owner, activeEditor.slotIndex);
+      editorContent.querySelectorAll("details[data-editor-detail]").forEach((details) => {
+        details.open = openDetails.has(details.dataset.editorDetail);
+      });
+      if (frame) frame.scrollTop = scrollTop;
+    }
+
+    function openEditor(owner, playerIndex, slotIndex) {
+      activeEditor = { owner, playerIndex, slotIndex };
+      if (owner === "extraMonster") {
+        const zone = gameState.extraMonsterZones[slotIndex];
+        playerIndex = zone.ownerIndex ?? gameState.turn.currentPlayerIndex;
+        activeEditor.playerIndex = playerIndex;
+      }
+      if (!editorDialog.open) editorDialog.showModal();
+      renderEditor();
+    }
+
+    function closeEditor() {
+      activeEditor = null;
+      if (editorDialog.open) editorDialog.close();
+    }
+
+    function handleCardAction(button, container) {
+      const action = button.dataset.action;
+      if (action === "close-editor") {
+        closeEditor();
+        return;
+      }
+      const playerIndex = Number.parseInt(button.dataset.player ?? "0", 10);
+      const owner = button.dataset.owner;
+      const slotIndex = Number.parseInt(button.dataset.slot ?? "0", 10);
       const player = gameState.players[playerIndex];
-      if (!player) return;
+      const trackedCard = getTrackedCard(player, owner, slotIndex);
+      const monsterIndex = Number.parseInt(button.dataset.monster ?? slotIndex, 10);
+      const monster = owner === "extraMonster" ? gameState.extraMonsterZones[slotIndex]?.monster : player?.monsters[monsterIndex];
+      if (owner === "extraMonster" && gameState.extraMonsterZones[slotIndex]?.ownerIndex === null && action !== "clear-card") {
+        gameState.extraMonsterZones[slotIndex].ownerIndex = playerIndex;
+      }
 
-      if (button.dataset.action === "life") {
+      if (action === "life") {
+        if (!player) return;
         player.lp += numberOrZero(button.dataset.delta);
-      } else if (button.dataset.action === "custom-life") {
+      } else if (action === "custom-life") {
+        if (!player) return;
         const input = button.parentElement.querySelector(".custom-life-amount");
-        const amount = Math.max(0, numberOrZero(input.value));
+        const amount = Math.max(0, numberOrZero(input?.value));
         player.lp += amount * Number(button.dataset.sign);
-        input.value = "";
-      } else if (button.dataset.action === "stat") {
-        const { monsterIndex } = getIndexes(button);
-        const monster = player.monsters[monsterIndex];
+        if (input) input.value = "";
+      } else if (action === "stat") {
         if (!monster) return;
         const step = Number.parseInt(document.getElementById("stat-step")?.value || "100", 10);
         const stat = button.dataset.stat;
-        monster[stat] = Math.max(0, monster[stat] + step * Number(button.dataset.sign));
-      } else if (button.dataset.action === "restore-monster") {
-        const { monsterIndex } = getIndexes(button);
-        const monster = player.monsters[monsterIndex];
+        monster[stat] = Math.max(0, numberOrZero(monster[stat]) + step * Number(button.dataset.sign));
+      } else if (action === "toggle-effect") {
+        if (!monster) return;
+        monster.effectNegated = !monster.effectNegated;
+      } else if (action === "restore-monster") {
         if (!monster) return;
         monster.atk = monster.baseAtk;
         monster.def = monster.baseDef;
+        monster.level = monster.baseLevel;
+        monster.rank = monster.baseRank;
+        monster.attribute = monster.baseAttribute;
+        monster.race = monster.baseRace;
+        monster.scaleLeft = monster.baseScaleLeft;
+        monster.scaleRight = monster.baseScaleRight;
+      } else if (action === "toggle-card-effect") {
+        if (!trackedCard) return;
+        trackedCard.effectNegated = !trackedCard.effectNegated;
+      } else if (action === "clear-card") {
+        if (owner === "extraMonster") {
+          gameState.extraMonsterZones[slotIndex] = { ownerIndex: null, monster: emptyMonster() };
+        } else if (owner === "monster") {
+          player.monsters[slotIndex] = emptyMonster();
+        } else if (owner === "field") {
+          player.fieldSpell = emptyZoneCard("field");
+        } else if (owner === "spelltrap") {
+          player.spellTraps[slotIndex] = emptyZoneCard();
+        }
+        closeEditor();
+        render();
+        return;
+      } else if (action === "counter-add") {
+        if (!trackedCard) return;
+        const input = button.parentElement.querySelector("[data-counter-input]");
+        const counterName = input?.value.trim();
+        if (!counterName) { input?.focus(); return; }
+        const existing = trackedCard.counters.find((counter) => counter.name.toLocaleLowerCase() === counterName.toLocaleLowerCase());
+        if (existing) existing.count += 1;
+        else trackedCard.counters.push({ name: counterName.slice(0, 32), count: 1 });
+      } else if (action === "counter-change") {
+        if (!trackedCard) return;
+        const counter = trackedCard.counters[Number.parseInt(button.dataset.counter, 10)];
+        if (!counter) return;
+        counter.count = Math.max(0, counter.count + Number(button.dataset.sign));
+      } else if (action === "counter-remove") {
+        if (!trackedCard) return;
+        trackedCard.counters.splice(Number.parseInt(button.dataset.counter, 10), 1);
+      } else {
+        return;
       }
       render();
+    }
+
+    playersElement.addEventListener("click", (event) => {
+      const zoneButton = event.target.closest("button[data-open-editor]");
+      if (zoneButton) {
+        openEditor(zoneButton.dataset.openEditor, Number.parseInt(zoneButton.dataset.player, 10), Number.parseInt(zoneButton.dataset.slot, 10));
+        return;
+      }
+      const button = event.target.closest("button[data-action]");
+      if (button) handleCardAction(button, playersElement);
     });
 
     playersElement.addEventListener("change", (event) => {
-      const input = event.target.closest("input[data-field]");
-      if (!input) return;
-      const playerIndex = Number.parseInt(input.dataset.player, 10);
+      const field = event.target.closest("[data-field]");
+      if (!field) return;
+      const playerIndex = Number.parseInt(field.dataset.player, 10);
       const player = gameState.players[playerIndex];
       if (!player) return;
+      if (field.dataset.field === "playerName") {
+        player.name = field.value.trim() || `Jugador ${playerIndex + 1}`;
+        render();
+      }
+    });
 
-      if (input.dataset.field === "playerName") {
-        player.name = input.value.trim() || `Jugador ${playerIndex + 1}`;
-      } else {
-        const monsterIndex = Number.parseInt(input.dataset.monster, 10);
-        const monster = player.monsters[monsterIndex];
-        if (!monster) return;
-        if (input.dataset.field === "monsterName") {
-          monster.name = input.value.trim();
-        } else if (input.dataset.field === "baseAtk") {
-          monster.baseAtk = Math.max(0, numberOrZero(input.value));
-          monster.atk = monster.baseAtk;
-        } else if (input.dataset.field === "baseDef") {
-          monster.baseDef = Math.max(0, numberOrZero(input.value));
-          monster.def = monster.baseDef;
+    editorContent.addEventListener("click", (event) => {
+      const button = event.target.closest("button[data-action]");
+      if (button) handleCardAction(button, editorContent);
+    });
+
+    editorContent.addEventListener("change", (event) => {
+      const field = event.target.closest("[data-field]");
+      if (!field || !activeEditor) return;
+      const { owner, slotIndex } = activeEditor;
+      let playerIndex = getEditorPlayerIndex();
+      if (field.dataset.field === "extraOwner" && owner === "extraMonster") {
+        const nextOwner = Number(field.value) === 1 ? 1 : 0;
+        gameState.extraMonsterZones[slotIndex].ownerIndex = nextOwner;
+        activeEditor.playerIndex = nextOwner;
+        render();
+        return;
+      }
+      const player = gameState.players[playerIndex];
+      const card = getEditorCard();
+      if (!card) return;
+      if (owner === "extraMonster" && gameState.extraMonsterZones[slotIndex].ownerIndex === null) {
+        gameState.extraMonsterZones[slotIndex].ownerIndex = playerIndex;
+      }
+      const fieldName = field.dataset.field;
+
+      if (fieldName === "monsterName") card.name = field.value.trim().slice(0, 40);
+      else if (fieldName === "monsterType") {
+        card.type = Object.hasOwn(MONSTER_TYPES, field.value) ? field.value : "";
+        if (card.type === "link") card.position = "attack";
+      } else if (fieldName === "monsterPendulum") card.isPendulum = Boolean(field.checked);
+      else if (fieldName === "monsterPosition") card.position = card.type === "link" ? "attack" : (["attack", "defense", "setDefense"].includes(field.value) ? field.value : "attack");
+      else if (["baseAtk", "baseDef", "baseLevel", "baseRank", "baseScaleLeft", "baseScaleRight"].includes(fieldName)) {
+        const normalized = Math.max(0, numberOrZero(field.value));
+        card[fieldName] = normalized;
+        const currentProperty = fieldName.slice(4).replace(/^./, (letter) => letter.toLowerCase());
+        card[currentProperty] = normalized;
+      } else if (["atk", "def", "level", "rank", "scaleLeft", "scaleRight", "linkRating"].includes(fieldName)) card[fieldName] = Math.max(0, numberOrZero(field.value));
+      else if (fieldName === "baseAttribute") { card.baseAttribute = Object.hasOwn(ATTRIBUTES, field.value) ? field.value : ""; card.attribute = card.baseAttribute; }
+      else if (fieldName === "attribute") card.attribute = Object.hasOwn(ATTRIBUTES, field.value) ? field.value : "";
+      else if (fieldName === "baseRace") { card.baseRace = field.value.trim().slice(0, 32); card.race = card.baseRace; }
+      else if (fieldName === "race") card.race = field.value.trim().slice(0, 32);
+      else if (fieldName === "zoneName") card.name = field.value.trim().slice(0, 40);
+      else if (fieldName === "zoneKind") card.kind = Object.hasOwn(SPELL_TRAP_TYPES, field.value) ? field.value : "";
+      else if (fieldName === "zoneFaceUp") card.faceUp = field.value === "true";
+      else if (fieldName === "equippedTarget") {
+        card.equippedToOwner = null;
+        card.equippedToPlayer = null;
+        card.equippedToMonster = null;
+        card.equippedToExtra = null;
+        card.equippedTo = "";
+        if (field.value.startsWith("main-")) {
+          const [, targetPlayer, targetMonster] = field.value.split("-").map((value, index) => index === 0 ? value : Number(value));
+          card.equippedToOwner = "monster";
+          card.equippedToPlayer = targetPlayer;
+          card.equippedToMonster = targetMonster;
+          const target = gameState.players[targetPlayer]?.monsters[targetMonster];
+          card.equippedTo = target?.name || `Monstruo ${targetMonster + 1}`;
+        } else if (field.value.startsWith("extra-")) {
+          const extraIndex = Number(field.value.split("-")[1]);
+          const target = gameState.extraMonsterZones[extraIndex];
+          if (target && target.ownerIndex !== null) {
+            card.equippedToOwner = "extraMonster";
+            card.equippedToExtra = extraIndex;
+            card.equippedToPlayer = target.ownerIndex;
+            card.equippedTo = target.monster.name || `Monstruo EMZ ${extraIndex + 1}`;
+          }
         }
       }
       render();
     });
 
+    editorDialog.addEventListener("click", (event) => {
+      if (event.target === editorDialog) closeEditor();
+    });
+
+    editorDialog.addEventListener("close", () => {
+      activeEditor = null;
+      editorContent.innerHTML = "";
+    });
+
     document.getElementById("new-duel").addEventListener("click", () => {
-      const confirmed = window.confirm("¿Empezar un duelo nuevo? Se reiniciarán los puntos de vida y los espacios de monstruos.");
+      const starterName = `Jugador ${nextFirstPlayerIndex + 1}`;
+      const confirmed = window.confirm(`¿Empezar un duelo nuevo? ${starterName} comenzará. Se reiniciarán los puntos de vida, los monstruos, las cartas Mágicas/Trampas, los contadores y las fases.`);
       if (!confirmed) return;
-      gameState = newGameState();
+      gameState = newGameState(nextFirstPlayerIndex);
       toolResult.textContent = "Nuevo duelo. ¡Que comience el juego!";
       render();
     });
