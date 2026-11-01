@@ -1,0 +1,27 @@
+{
+  "name": "Duel Companion",
+  "short_name": "Duel",
+  "description": "Herramientas offline para acompañar tus duelos de cartas.",
+  "lang": "es",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#071522",
+  "theme_color": "#102b46",
+  "categories": ["games", "utilities"],
+  "icons": [
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

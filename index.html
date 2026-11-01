@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#102b46">
+  <meta name="description" content="Un compañero de duelos Yu-Gi-Oh! que funciona sin conexión.">
+  <title>Duel Companion</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icons/icon-192.png" type="image/png">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #071522;
+      --panel: #102b46;
+      --panel-2: #173a5b;
+      --line: #285579;
+      --text: #eef6ff;
+      --muted: #a9bfd2;
+      --accent: #63d5ee;
+      --good: #7ee0b0;
+      --danger: #ff9b9b;
+      --button: #1d5278;
+      --button-hover: #286a99;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #123454 0, var(--bg) 55%);
+      color: var(--text);
+    }
+    button, input, select { font: inherit; }
+    button {
+      border: 1px solid #39749c;
+      border-radius: 10px;
+      background: var(--button);
+      color: var(--text);
+      padding: .65rem .8rem;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+    button:active { transform: translateY(1px); }
+    button:hover { background: var(--button-hover); }
+    button:focus-visible, input:focus-visible, select:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+    input, select {
+      width: 100%;
+      min-width: 0;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #081c2d;
+      color: var(--text);
+      padding: .62rem .65rem;
+    }
+    input[type="number"] { font-variant-numeric: tabular-nums; }
+    .app-shell { width: min(1100px, 100%); margin: 0 auto; padding: 1rem; }
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin: .25rem 0 1rem;
+    }
+    .brand { display: flex; align-items: center; gap: .75rem; }
+    .brand img { width: 48px; height: 48px; }
+    h1 { font-size: clamp(1.25rem, 4vw, 1.8rem); margin: 0; letter-spacing: .04em; }
+    .subtitle { margin: .15rem 0 0; color: var(--muted); font-size: .85rem; }
+    .top-actions { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; }
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: .42rem .7rem;
+      color: var(--good);
+      font-size: .78rem;
+      background: #0b2538;
+    }
+    .status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+    .status.online { color: var(--good); }
+    .status.offline { color: #ffd27d; }
+    .note { color: var(--muted); font-size: .86rem; margin: .35rem 0 .65rem; }
+    .duel-options { display: flex; align-items: center; gap: .55rem; flex-wrap: wrap; margin: 0 0 1rem; color: var(--muted); font-size: .82rem; }
+    .duel-options select { width: auto; min-width: 88px; padding: .4rem .55rem; }
+    .players-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; align-items: start; }
+    .player-card {
+      min-width: 0;
+      background: linear-gradient(160deg, #143958, #0c2439 70%);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 1rem;
+      box-shadow: 0 12px 30px #0003;
+    }
+    .player-heading { display: flex; align-items: center; gap: .6rem; margin-bottom: .85rem; }
+    .player-heading input { font-weight: 700; font-size: 1rem; }
+    .player-number { color: var(--accent); font-weight: 800; font-size: .8rem; white-space: nowrap; }
+    .life-box { background: #071d30; border: 1px solid #285579; border-radius: 13px; padding: .9rem; margin-bottom: 1rem; }
+    .life-label { display: flex; justify-content: space-between; color: var(--muted); font-size: .82rem; }
+    .life-total { display: block; color: var(--good); font-size: clamp(2.25rem, 7vw, 3.3rem); line-height: 1.15; font-weight: 800; letter-spacing: .02em; text-align: center; margin: .25rem 0 .65rem; font-variant-numeric: tabular-nums; }
+    .quick-life { display: grid; grid-template-columns: repeat(4, 1fr); gap: .4rem; }
+    .quick-life button { padding: .55rem .25rem; font-size: .82rem; }
+    .custom-life { display: grid; grid-template-columns: minmax(70px, 1fr) 1fr 1fr; gap: .4rem; margin-top: .5rem; }
+    .custom-life button { padding: .5rem .3rem; font-size: .82rem; }
+    .section-heading { display: flex; justify-content: space-between; align-items: center; gap: .5rem; margin: 1rem 0 .6rem; }
+    .section-heading h2 { margin: 0; font-size: 1rem; }
+    .section-heading label { color: var(--muted); font-size: .76rem; display: flex; align-items: center; gap: .4rem; }
+    .step-select { width: 76px; padding: .35rem; }
+    .monster-list { display: grid; gap: .65rem; }
+    .monster {
+      border: 1px solid #285579;
+      border-radius: 12px;
+      padding: .7rem;
+      background: #0a2033;
+    }
+    .monster-head { display: flex; justify-content: space-between; align-items: center; gap: .5rem; margin-bottom: .5rem; }
+    .monster-index { color: var(--accent); font-weight: 750; font-size: .78rem; }
+    .tiny-button { font-size: .72rem; padding: .35rem .5rem; }
+    .monster-name { margin-bottom: .55rem; }
+    .base-grid, .current-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; }
+    .field-label { color: var(--muted); display: block; font-size: .7rem; margin-bottom: .25rem; }
+    .base-grid input { padding: .45rem .5rem; }
+    .current-grid { margin-top: .65rem; }
+    .stat-box { border: 1px solid #214866; background: #102d46; border-radius: 9px; padding: .5rem; text-align: center; }
+    .stat-value { display: block; font-weight: 800; font-size: 1.2rem; font-variant-numeric: tabular-nums; }
+    .stat-controls { display: flex; justify-content: center; gap: .4rem; margin-top: .35rem; }
+    .stat-controls button { width: 38px; padding: .3rem; font-weight: 800; }
+    .tools-panel { margin-top: 1rem; padding: 1rem; border: 1px solid var(--line); border-radius: 16px; background: #0d263c; }
+    .tools-panel h2 { margin: 0 0 .65rem; font-size: 1rem; }
+    .tool-buttons { display: flex; flex-wrap: wrap; gap: .55rem; }
+    .tool-result { min-height: 1.5rem; margin: .75rem 0 0; color: var(--accent); font-weight: 700; }
+    .footer { text-align: center; color: var(--muted); font-size: .75rem; margin: 1.3rem 0 .5rem; }
+    .danger { border-color: #865050; background: #512b35; }
+    .danger:hover { background: #713846; }
+    @media (max-width: 760px) {
+      .app-shell { padding: .75rem; }
+      .players-grid { grid-template-columns: 1fr; }
+      .topbar { align-items: flex-start; }
+      .top-actions { width: 100%; justify-content: space-between; }
+    }
+    @media (max-width: 360px) {
+      .quick-life { grid-template-columns: repeat(2, 1fr); }
+      .custom-life { grid-template-columns: 1fr 1fr; }
+      .custom-life input { grid-column: 1 / -1; }
+    }
+  </style>
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <img src="./icons/icon-192.png" alt="" width="48" height="48">
+        <div>
+          <h1>DUEL COMPANION</h1>
+          <p class="subtitle">Tu compañero de duelos, con o sin conexión.</p>
+        </div>
+      </div>
+      <div class="top-actions">
+        <span id="network-status" class="status">Comprobando conexión…</span>
+        <button id="new-duel" class="danger" type="button">Nuevo duelo</button>
+      </div>
+    </header>
+
+    <p class="note">Los cambios se guardan automáticamente en este dispositivo. Esta primera versión no necesita conexión ni cuentas.</p>
+    <div class="duel-options">
+      <label for="stat-step">Incremento por toque en ATK/DEF:</label>
+      <select id="stat-step">
+        <option value="50">50</option>
+        <option value="100" selected>100</option>
+        <option value="500">500</option>
+        <option value="1000">1000</option>
+      </select>
+    </div>
+
+    <section id="players" class="players-grid" aria-label="Marcadores de los jugadores"></section>
+
+    <section class="tools-panel" aria-labelledby="tools-title">
+      <h2 id="tools-title">Herramientas del duelo</h2>
+      <div class="tool-buttons">
+        <button type="button" data-tool="coin">Lanzar moneda</button>
+        <button type="button" data-tool="dice" data-sides="6">Dado de 6</button>
+        <button type="button" data-tool="dice" data-sides="20">Dado de 20</button>
+      </div>
+      <p id="tool-result" class="tool-result" aria-live="polite">Los resultados aparecerán acá.</p>
+    </section>
+
+    <p id="save-status" class="footer" aria-live="polite">Partida guardada en este dispositivo.</p>
+  </main>
+
+  <script>
+    "use strict";
+
+    const STORAGE_KEY = "duel-companion-state-v1";
+    const playersElement = document.getElementById("players");
+    const networkStatus = document.getElementById("network-status");
+    const saveStatus = document.getElementById("save-status");
+    const toolResult = document.getElementById("tool-result");
+
+    function emptyMonster() {
+      return { name: "", baseAtk: 0, baseDef: 0, atk: 0, def: 0 };
+    }
+
+    function newGameState() {
+      return {
+        players: [0, 1].map((index) => ({
+          name: `Jugador ${index + 1}`,
+          lp: 8000,
+          monsters: Array.from({ length: 5 }, emptyMonster)
+        }))
+      };
+    }
+
+    function numberOrZero(value) {
+      const parsed = Number.parseInt(value, 10);
+      return Number.isFinite(parsed) ? parsed : 0;
+    }
+
+    function loadState() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+        if (!saved || !Array.isArray(saved.players) || saved.players.length !== 2) {
+          return newGameState();
+        }
+        return {
+          players: saved.players.map((player, playerIndex) => ({
+            name: typeof player.name === "string" ? player.name : `Jugador ${playerIndex + 1}`,
+            lp: Number.isFinite(Number(player.lp)) ? Number(player.lp) : 8000,
+            monsters: Array.from({ length: 5 }, (_, monsterIndex) => {
+              const monster = player.monsters && player.monsters[monsterIndex]
+                ? player.monsters[monsterIndex]
+                : emptyMonster();
+              return {
+                name: typeof monster.name === "string" ? monster.name : "",
+                baseAtk: numberOrZero(monster.baseAtk),
+                baseDef: numberOrZero(monster.baseDef),
+                atk: numberOrZero(monster.atk),
+                def: numberOrZero(monster.def)
+              };
+            })
+          }))
+        };
+      } catch (error) {
+        console.warn("No se pudo recuperar la partida guardada:", error);
+        return newGameState();
+      }
+    }
+
+    let gameState = loadState();
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(gameState));
+        saveStatus.textContent = "Partida guardada en este dispositivo.";
+      } catch (error) {
+        saveStatus.textContent = "No se pudo guardar la partida en este navegador.";
+        console.error("Error al guardar:", error);
+      }
+    }
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, (character) => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
+      })[character]);
+    }
+
+    function formatNumber(value) {
+      return Number(value).toLocaleString("es-AR");
+    }
+
+    function renderMonster(monster, playerIndex, monsterIndex) {
+      const name = escapeHtml(monster.name);
+      return `
+        <article class="monster">
+          <div class="monster-head">
+            <span class="monster-index">MONSTRUO ${monsterIndex + 1}</span>
+            <button class="tiny-button" type="button" data-action="restore-monster" data-player="${playerIndex}" data-monster="${monsterIndex}">Restaurar ATK/DEF</button>
+          </div>
+          <label class="field-label" for="monster-${playerIndex}-${monsterIndex}-name">Nombre (opcional)</label>
+          <input class="monster-name" id="monster-${playerIndex}-${monsterIndex}-name" type="text" maxlength="40" placeholder="Nombre del monstruo" value="${name}" data-field="monsterName" data-player="${playerIndex}" data-monster="${monsterIndex}">
+          <div class="base-grid">
+            <label><span class="field-label">ATK original</span><input type="number" inputmode="numeric" step="1" min="0" value="${monster.baseAtk || ""}" placeholder="—" data-field="baseAtk" data-player="${playerIndex}" data-monster="${monsterIndex}"></label>
+            <label><span class="field-label">DEF original</span><input type="number" inputmode="numeric" step="1" min="0" value="${monster.baseDef || ""}" placeholder="—" data-field="baseDef" data-player="${playerIndex}" data-monster="${monsterIndex}"></label>
+          </div>
+          <div class="current-grid">
+            <div class="stat-box">
+              <span class="field-label">ATK ACTUAL</span>
+              <strong class="stat-value">${formatNumber(monster.atk)}</strong>
+              <div class="stat-controls">
+                <button type="button" aria-label="Restar ATK" data-action="stat" data-stat="atk" data-sign="-1" data-player="${playerIndex}" data-monster="${monsterIndex}">−</button>
+                <button type="button" aria-label="Sumar ATK" data-action="stat" data-stat="atk" data-sign="1" data-player="${playerIndex}" data-monster="${monsterIndex}">+</button>
+              </div>
+            </div>
+            <div class="stat-box">
+              <span class="field-label">DEF ACTUAL</span>
+              <strong class="stat-value">${formatNumber(monster.def)}</strong>
+              <div class="stat-controls">
+                <button type="button" aria-label="Restar DEF" data-action="stat" data-stat="def" data-sign="-1" data-player="${playerIndex}" data-monster="${monsterIndex}">−</button>
+                <button type="button" aria-label="Sumar DEF" data-action="stat" data-stat="def" data-sign="1" data-player="${playerIndex}" data-monster="${monsterIndex}">+</button>
+              </div>
+            </div>
+          </div>
+        </article>`;
+    }
+
+    function renderPlayer(player, playerIndex) {
+      return `
+        <section class="player-card" aria-label="${escapeHtml(player.name)}">
+          <div class="player-heading">
+            <span class="player-number">J${playerIndex + 1}</span>
+            <input type="text" maxlength="24" aria-label="Nombre del jugador ${playerIndex + 1}" value="${escapeHtml(player.name)}" data-field="playerName" data-player="${playerIndex}">
+          </div>
+          <div class="life-box">
+            <div class="life-label"><span>PUNTOS DE VIDA</span><span>Inicio: 8000</span></div>
+            <output class="life-total" aria-label="Puntos de vida">${formatNumber(player.lp)}</output>
+            <div class="quick-life">
+              <button type="button" data-action="life" data-delta="-1000" data-player="${playerIndex}">−1000</button>
+              <button type="button" data-action="life" data-delta="-500" data-player="${playerIndex}">−500</button>
+              <button type="button" data-action="life" data-delta="500" data-player="${playerIndex}">+500</button>
+              <button type="button" data-action="life" data-delta="1000" data-player="${playerIndex}">+1000</button>
+            </div>
+            <div class="custom-life">
+              <input type="number" min="0" step="1" inputmode="numeric" placeholder="Otra cantidad" aria-label="Otra cantidad de puntos de vida" class="custom-life-amount">
+              <button type="button" data-action="custom-life" data-sign="-1" data-player="${playerIndex}">− Aplicar</button>
+              <button type="button" data-action="custom-life" data-sign="1" data-player="${playerIndex}">+ Aplicar</button>
+            </div>
+          </div>
+          <div class="section-heading">
+            <h2>Zona de monstruos</h2>
+          </div>
+          <div class="monster-list">
+            ${player.monsters.map((monster, monsterIndex) => renderMonster(monster, playerIndex, monsterIndex)).join("")}
+          </div>
+        </section>`;
+    }
+
+    function render() {
+      playersElement.innerHTML = gameState.players.map(renderPlayer).join("");
+      saveState();
+    }
+
+    function getIndexes(element) {
+      return {
+        playerIndex: Number.parseInt(element.dataset.player, 10),
+        monsterIndex: Number.parseInt(element.dataset.monster, 10)
+      };
+    }
+
+    playersElement.addEventListener("click", (event) => {
+      const button = event.target.closest("button[data-action]");
+      if (!button) return;
+
+      const playerIndex = Number.parseInt(button.dataset.player, 10);
+      const player = gameState.players[playerIndex];
+      if (!player) return;
+
+      if (button.dataset.action === "life") {
+        player.lp += numberOrZero(button.dataset.delta);
+      } else if (button.dataset.action === "custom-life") {
+        const input = button.parentElement.querySelector(".custom-life-amount");
+        const amount = Math.max(0, numberOrZero(input.value));
+        player.lp += amount * Number(button.dataset.sign);
+        input.value = "";
+      } else if (button.dataset.action === "stat") {
+        const { monsterIndex } = getIndexes(button);
+        const monster = player.monsters[monsterIndex];
+        if (!monster) return;
+        const step = Number.parseInt(document.getElementById("stat-step")?.value || "100", 10);
+        const stat = button.dataset.stat;
+        monster[stat] = Math.max(0, monster[stat] + step * Number(button.dataset.sign));
+      } else if (button.dataset.action === "restore-monster") {
+        const { monsterIndex } = getIndexes(button);
+        const monster = player.monsters[monsterIndex];
+        if (!monster) return;
+        monster.atk = monster.baseAtk;
+        monster.def = monster.baseDef;
+      }
+      render();
+    });
+
+    playersElement.addEventListener("change", (event) => {
+      const input = event.target.closest("input[data-field]");
+      if (!input) return;
+      const playerIndex = Number.parseInt(input.dataset.player, 10);
+      const player = gameState.players[playerIndex];
+      if (!player) return;
+
+      if (input.dataset.field === "playerName") {
+        player.name = input.value.trim() || `Jugador ${playerIndex + 1}`;
+      } else {
+        const monsterIndex = Number.parseInt(input.dataset.monster, 10);
+        const monster = player.monsters[monsterIndex];
+        if (!monster) return;
+        if (input.dataset.field === "monsterName") {
+          monster.name = input.value.trim();
+        } else if (input.dataset.field === "baseAtk") {
+          monster.baseAtk = Math.max(0, numberOrZero(input.value));
+          monster.atk = monster.baseAtk;
+        } else if (input.dataset.field === "baseDef") {
+          monster.baseDef = Math.max(0, numberOrZero(input.value));
+          monster.def = monster.baseDef;
+        }
+      }
+      render();
+    });
+
+    document.getElementById("new-duel").addEventListener("click", () => {
+      const confirmed = window.confirm("¿Empezar un duelo nuevo? Se reiniciarán los puntos de vida y los espacios de monstruos.");
+      if (!confirmed) return;
+      gameState = newGameState();
+      toolResult.textContent = "Nuevo duelo. ¡Que comience el juego!";
+      render();
+    });
+
+    document.querySelector(".tool-buttons").addEventListener("click", (event) => {
+      const button = event.target.closest("button[data-tool]");
+      if (!button) return;
+      if (button.dataset.tool === "coin") {
+        toolResult.textContent = Math.random() < 0.5 ? "Moneda: CARA" : "Moneda: CRUZ";
+      } else if (button.dataset.tool === "dice") {
+        const sides = Math.max(2, Number.parseInt(button.dataset.sides, 10) || 6);
+        toolResult.textContent = `Dado de ${sides}: ${Math.floor(Math.random() * sides) + 1}`;
+      }
+    });
+
+    function updateNetworkStatus() {
+      const online = navigator.onLine;
+      networkStatus.textContent = online ? "Con conexión" : "Sin conexión · modo offline";
+      networkStatus.classList.toggle("online", online);
+      networkStatus.classList.toggle("offline", !online);
+    }
+
+    window.addEventListener("online", updateNetworkStatus);
+    window.addEventListener("offline", updateNetworkStatus);
+
+    render();
+    updateNetworkStatus();
+
+    if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./service-worker.js")
+          .catch((error) => console.error("No se pudo registrar el Service Worker:", error));
+      });
+    }
+  </script>
+</body>
+</html>
